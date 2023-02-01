@@ -1,0 +1,25 @@
+<div *ngIf="monster">
+    <h2>{{ monster.name }}</h2>
+    <div>
+        <img [src]="monster.avatar" alt="">
+    </div>
+    <div>
+        <ul>
+            <li>
+                {{ monster.race}}
+            </li>
+            <li>
+                {{ monster.role }}
+            </li>
+        </ul>
+        <span>
+            Membre depuis {{ monster.created_at | date: "yyyy" }}
+        </span>
+    </div>
+</div>
+<div>
+    <a (click)="goToMonstersList()" href="">
+        Retour
+    </a>
+</div>
+<h4 *ngIf='!monster'>Aucun monstre ne correspond.</h4>

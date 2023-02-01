@@ -1,0 +1,29 @@
+<h1>Liste des monstres</h1>
+
+<div>
+    <div *ngFor="let monster of monsterList"
+            (click)="goToMonsterProfil(monster)"
+            class="monster-card">
+        <div>
+            <img [src]="monster.avatar" alt="" />
+        </div>
+        <div>
+            <p>
+                {{ monster.name }}
+            </p>
+            <ul>
+                <li>
+                    {{ monster.role }}
+                </li>
+                <li>
+                    {{ monster.race }}
+                </li>
+            </ul>
+        </div>
+        <div>
+            <p>
+                {{ monster.created_at | date }}
+            </p>
+        </div>
+    </div>
+</div>
