@@ -1,0 +1,66 @@
+<form *ngIf="monster" (ngSubmit)="onSubmit()" #monsterForm="ngForm">
+    <div class="row">
+        <div class="col s8 offset-s2">
+            <div class="card-panel">
+
+                <!-- monster name -->
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" required
+                        [(ngModel)]="monster.name" name="name" #name="ngModel">
+
+                    <div [hidden]="name.valid || name.pristine">
+                        Un nom est requis (1-35).
+                    </div>
+                </div>
+
+                <!-- monster email -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" required
+                        [(ngModel)]="monster.email" name="email" #email="ngModel">
+                    <div [hidden]="email.valid || email.pristine">
+                        Vous devez indiquer une adresse mail valide.
+                    </div>
+                </div>
+
+                <!-- monster race -->
+                <!-- <div class="form-group">
+                    <label for="race">Race</label>
+                    <input type="text" id="race" required
+                        [(ngModel)]="monster.race" name="race" #race="ngModel">
+                    <div [hidden]="race.valid || race.pristine">
+                        Votre race ne fait pas partie de la selection.
+                    </div>
+                </div> -->
+
+                <!-- monster role -->
+                <form>
+                    <label for="role">Role</label>
+                    <p *ngFor="let role of monsterRole">
+                        <label>
+                            <input type="checkbox"
+                                    id="{{ role }}"
+                                    [value]="role"
+                                    [checked]="hasRole(role)"
+                                    [disabled]="!isRoleValid(role)"
+                                    (change)="selectRole($event, role)" />
+                            <span [attr.for]="role">
+                                    {{ role }}
+                            </span>
+                        </label>
+                    </p>
+                </form>
+
+                <!-- Submit button -->
+                <div>
+                    <button type="submit"[disabled]="!monsterForm.form.valid">
+                        Valider
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<h3 *ngIf="!monster">Aucun monstre à éditer...</h3>

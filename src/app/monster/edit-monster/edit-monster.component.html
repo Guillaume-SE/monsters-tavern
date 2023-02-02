@@ -1,0 +1,7 @@
+<h2>Modifier votre profil</h2>
+
+<div *ngIf="monster">
+    <img [src]="monster.avatar" alt="">
+</div>
+
+<app-monster-form *ngIf="monster" [monster]="monster"></app-monster-form>

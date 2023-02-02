@@ -16,10 +16,17 @@
             Membre depuis {{ monster.created_at | date: "yyyy" }}
         </span>
     </div>
-</div>
-<div>
-    <a (click)="goToMonstersList()" href="">
-        Retour
-    </a>
+    <div>
+        <div>
+            <button (click)="goToMonstersList()">
+                Retour
+            </button>
+        </div>
+        <div>
+            <button (click)="goToEditMonster(monster)">
+                Modifier
+            </button>
+        </div>
+    </div>
 </div>
 <h4 *ngIf='!monster'>Aucun monstre ne correspond.</h4>
