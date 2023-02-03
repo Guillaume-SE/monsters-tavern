@@ -25,25 +25,33 @@
                 </div>
 
                 <!-- monster race -->
-                <!-- <div class="form-group">
+                <form>
                     <label for="race">Race</label>
-                    <input type="text" id="race" required
-                        [(ngModel)]="monster.race" name="race" #race="ngModel">
-                    <div [hidden]="race.valid || race.pristine">
-                        Votre race ne fait pas partie de la selection.
-                    </div>
-                </div> -->
+                    <p *ngFor="let race of monsterRace">
+                        <label>
+                            <input type="radio"
+                                    id="{{ race }}"
+                                    [value]="race"
+                                    [checked]="hasRace(race)"
+                                    
+                                    (change)="selectRace($event, race)" />
+                            <span [attr.for]="race">
+                                    {{ race }}
+                            </span>
+                        </label>
+                    </p>
+                </form>
 
                 <!-- monster role -->
                 <form>
                     <label for="role">Role</label>
                     <p *ngFor="let role of monsterRole">
                         <label>
-                            <input type="checkbox"
+                            <input type="radio"
                                     id="{{ role }}"
                                     [value]="role"
                                     [checked]="hasRole(role)"
-                                    [disabled]="!isRoleValid(role)"
+                                    
                                     (change)="selectRole($event, role)" />
                             <span [attr.for]="role">
                                     {{ role }}

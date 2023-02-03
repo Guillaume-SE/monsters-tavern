@@ -11,6 +11,7 @@ import { MonsterService } from '../monster.service';
 export class MonsterFormComponent implements OnInit {
   @Input() monster: Monster;
   monsterRole: string[];
+  monsterRace: string[];
 
   constructor(
     private monsterService: MonsterService,
@@ -19,10 +20,15 @@ export class MonsterFormComponent implements OnInit {
 
   ngOnInit() {
     this.monsterRole = this.monsterService.getMonsterRoleList();
+    this.monsterRace = this.monsterService.getMonsterRaceList();
   }
 
   hasRole(role: string): boolean {
     return this.monster.role.includes(role);
+  }
+
+  hasRace(race: string): boolean {
+    return this.monster.race.includes(race);
   }
 
   selectRole($event: Event, role: string) {
@@ -33,17 +39,12 @@ export class MonsterFormComponent implements OnInit {
     }
   }
 
-  isRoleValid(role: string): boolean {
+  selectRace($event: Event, race: string) {
+    const isChecked: boolean = ($event.target as HTMLInputElement).checked;
 
-    if (this.monster.role.length == 1 && this.hasRole(role)) {
-      return false;
+    if (isChecked) {
+      this.monster.race = race;
     }
-
-    if (this.monster.role.length < 1 && !this.hasRole(role)) {
-      return false;
-    }
-
-    return true;
   }
 
   onSubmit() {

@@ -25,4 +25,18 @@ export class MonsterService {
       "Sorcier"
     ]
   }
+
+  getMonsterRaceList(): string[] {
+    return [
+      "Démon",
+      "Lycanthrope",
+      "Vampire",
+      "Orc",
+      "Gobelin",
+      "Elfe",
+      "Dragon",
+      "Harpie",
+      "Goule"
+    ]
+  }
 }
