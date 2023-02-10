@@ -16,15 +16,15 @@
             Membre depuis {{ monster.created_at | date: "yyyy" }}
         </span>
     </div>
-    <div>
-        <div>
-            <button (click)="goToMonstersList()">
-                Retour
-            </button>
-        </div>
+    <div *ngIf="isLogged()">
         <div>
             <button (click)="goToEditMonster(monster)">
                 Modifier
+            </button>
+        </div>
+        <div>
+            <button (click)="logout()">
+                Deconnexion
             </button>
         </div>
     </div>

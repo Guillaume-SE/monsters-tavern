@@ -2,6 +2,23 @@
     <div>
         <a href="">Accueil</a>
     </div>
+    <div *ngIf="isLogged()">
+        <a href="">
+            Mon compte
+        </a>
+    </div>
+    <div *ngIf="!isLogged()">
+        <div>
+            <a (click)="goToLogin()">
+                Se connecter
+            </a>
+        </div>
+        <div>
+            <a (click)="goToSignup()">
+                S'inscrire
+            </a>
+        </div>
+    </div>
 </nav>
 
 <router-outlet></router-outlet>

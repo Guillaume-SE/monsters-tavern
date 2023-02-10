@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Monster } from '../monster';
-import { MonsterService } from '../monster.service';
+import { MonsterService } from '../../_services/monster.service';
 
 @Component({
   selector: 'app-monster-form',
@@ -48,7 +48,12 @@ export class MonsterFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("Le formulaire a été soumis");
-    this.router.navigate(['/monster', this.monster.id]);
+    // this.monsterService.updateMonster(this.monster)
+    //   .subscribe((monster) => {
+        // console.log(this.monster, "YO");
+        // if(monster) {
+        //   this.router.navigate(['/monster', this.monster._id])
+        // }
+      // });
   }
 }

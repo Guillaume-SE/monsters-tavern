@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Monster } from '../monster';
-import { MonsterService } from '../monster.service';
+import { MonsterService } from '../../_services/monster.service';
 
 @Component({
   selector: 'app-list-monsters',
@@ -16,11 +16,12 @@ export class ListMonstersComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.monsterList = this.monsterService.getMonsterList();
+    this.monsterService.getMonsterList()
+      .subscribe((monsterList) => this.monsterList = monsterList);
   }
 
   goToMonsterProfil(monster: Monster) {
-    this.router.navigate(['/monster', monster.id]);
+    this.router.navigate(['/monster', monster._id]);
   }
 
 }

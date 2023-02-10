@@ -1,5 +1,5 @@
 export class Monster {
-    id: string;
+    _id: string;
     name: string;
     email: string;
     role: string;

@@ -1,0 +1,39 @@
+<div>
+    <div>
+        <!-- <p>
+            {{message}}
+        </p> -->
+    </div>
+    <form name="form"
+        #loginForm="ngForm"
+        (ngSubmit)="loginForm.form.valid && onSubmit()"
+    >
+        <div>
+            <label for="email">Adresse email</label>
+            <input type="text" id="email" [(ngModel)]="form.email" name="email" #email="ngModel" required autocomplete="off">
+            <span *ngIf="email.errors && loginForm.submitted">
+                Adresse email requise
+            </span>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" [(ngModel)]="form.password" #password="ngModel" name="password" required>
+            <span *ngIf="password.errors && loginForm.submitted">
+                Mot de passe est requis
+            </span>
+        </div>
+        <div>
+            <button>
+                Se connecter
+            </button>
+        </div>
+    </form>
+    <div>
+        <p>
+            Pas encore membre ?
+        </p>
+        <a (click)="goToSignup()">
+            Créer un compte
+        </a>
+    </div>
+</div>
