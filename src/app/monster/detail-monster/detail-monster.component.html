@@ -15,6 +15,47 @@
         <span>
             Membre depuis {{ monster.created_at | date: "yyyy" }}
         </span>
+
+        <div>
+            <div>
+                <button (click)="showMonsterFollowing()">
+                    Abonnements
+                </button>
+                <div *ngIf="this.followingList.length > 0; else noFollowing">
+                <div *ngFor="let following of followingList">
+                    <ul>
+                        <li>
+                            {{ following.name }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <ng-template #noFollowing>
+                <span>
+                    Aucun abonnement
+                </span>
+            </ng-template>
+            </div>
+            <div>
+                <button (click)="showMonsterFollower()">
+                    Abonnés
+                </button>
+                <div *ngIf="this.followerList.length > 0; else noFollower">
+                <div *ngFor="let follower of followerList">
+                    <ul>
+                        <li>
+                            {{ follower.name }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+                <ng-template #noFollower>
+                    <span>
+                        Aucun abonné
+                    </span>
+                </ng-template>
+            </div>
+        </div>
     </div>
     <div *ngIf="isLogged()">
         <div>

@@ -10,14 +10,18 @@ export class TokenService {
     private router: Router
   ) { }
 
+  isLogged(): boolean {
+    const token = sessionStorage.getItem('token');
+    return !!token;
+  }
+
   saveToken(token: string): void {
     sessionStorage.setItem('token', token);
     this.router.navigate(['/monsters'])
   }
 
-  isLogged(): boolean {
-    const token = sessionStorage.getItem('token');
-    return !!token;
+  getToken(): string | null{
+    return sessionStorage.getItem('token');
   }
 
   deleteToken(): void {

@@ -10,6 +10,7 @@ import { ListMonstersComponent } from './list-monsters/list-monsters.component';
 import { DetailMonsterComponent } from './detail-monster/detail-monster.component';
 import { MonsterFormComponent } from './monster-form/monster-form.component';
 import { EditMonsterComponent } from './edit-monster/edit-monster.component';
+import { FollowService } from '../_services/follow.service';
 
 const monsterRoutes: Routes = [
   {
@@ -40,7 +41,8 @@ const monsterRoutes: Routes = [
     RouterModule.forChild(monsterRoutes)
   ],
   providers: [
-    MonsterService
+    MonsterService,
+    FollowService
   ]
 })
 export class MonsterModule { }

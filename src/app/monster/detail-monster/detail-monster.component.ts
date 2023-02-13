@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Monster } from '../monster';
+
 import { MonsterService } from '../../_services/monster.service';
 import { TokenService } from 'src/app/_services/token.service';
+import { FollowService } from 'src/app/_services/follow.service';
+
+import { IFollow } from 'src/app/_interfaces/follow';
 
 @Component({
   selector: 'app-detail-monster',
@@ -10,7 +14,9 @@ import { TokenService } from 'src/app/_services/token.service';
 })
 export class DetailMonsterComponent implements OnInit {
 
-  monsterList: Monster[];
+  monsterList: Monster[] = [];
+  followingList: IFollow[] = [];
+  followerList: IFollow[] = [];
   monster: Monster | undefined;
   isLoggedIn: boolean = false;
 
@@ -18,7 +24,8 @@ export class DetailMonsterComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private monsterService: MonsterService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private followService: FollowService
   ) { }
 
   ngOnInit() {
@@ -39,9 +46,26 @@ export class DetailMonsterComponent implements OnInit {
   }
 
   isLogged() {
-    if(this.tokenService.isLogged())  {
+    if (this.tokenService.isLogged()) {
       return true;
     }
     return false;
+  }
+
+  showMonsterFollowing() {
+    if (this.isLogged() && this.monster) {
+      this.followService.getMonsterFollowingList(this.monster._id)
+        .subscribe((followingList) => this.followingList = followingList);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+  showMonsterFollower() {
+    if (this.isLogged() && this.monster) {
+      this.followService.getMonsterFollowerList(this.monster._id)
+        .subscribe((followerList) => this.followerList = followerList);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

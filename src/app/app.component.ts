@@ -21,12 +21,4 @@ export class AppComponent {
     }
     return false;
   }
-
-  goToSignup() {
-    return this.router.navigate(['signup']);
-  }
-
-  goToLogin() {
-    return this.router.navigate(['/login']);
-  }
 }

@@ -1,9 +1,4 @@
 <div>
-    <div>
-        <!-- <p>
-            {{message}}
-        </p> -->
-    </div>
     <form name="form"
         #loginForm="ngForm"
         (ngSubmit)="loginForm.form.valid && onSubmit()"
@@ -32,7 +27,7 @@
         <p>
             Pas encore membre ?
         </p>
-        <a (click)="goToSignup()">
+        <a [routerLink]="['/signup']">
             Créer un compte
         </a>
     </div>

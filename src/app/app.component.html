@@ -1,6 +1,8 @@
 <nav>
     <div>
-        <a href="">Accueil</a>
+        <a [routerLink]="['/monsters']">
+            Accueil
+        </a>
     </div>
     <div *ngIf="isLogged()">
         <a href="">
@@ -9,12 +11,12 @@
     </div>
     <div *ngIf="!isLogged()">
         <div>
-            <a (click)="goToLogin()">
+            <a [routerLink]="['/login']">
                 Se connecter
             </a>
         </div>
         <div>
-            <a (click)="goToSignup()">
+            <a [routerLink]="['/signup']">
                 S'inscrire
             </a>
         </div>

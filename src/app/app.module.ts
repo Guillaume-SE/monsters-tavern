@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { TokenInterceptorProvider } from './_helpers/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { SignupComponent } from './signup/signup.component';
     MonsterModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    TokenInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
