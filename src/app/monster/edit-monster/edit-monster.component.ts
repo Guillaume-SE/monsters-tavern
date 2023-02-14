@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Monster } from '../monster';
+
 import { MonsterService } from '../../_services/monster.service';
+
+import { IMonster } from 'src/app/_interfaces/monster';
 
 @Component({
   selector: 'app-edit-monster',
@@ -10,7 +12,7 @@ import { MonsterService } from '../../_services/monster.service';
 })
 export class EditMonsterComponent {
 
-  monster: Monster | undefined;
+  monster: IMonster | undefined;
 
   constructor(
     private route: ActivatedRoute,

@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { Monster } from '../monster/monster';
+
+import { IMonster } from 'src/app/_interfaces/monster';
 
 @Injectable()
 export class MonsterService {
@@ -9,7 +10,7 @@ export class MonsterService {
 
   constructor(private http: HttpClient) { }
 
-  private log(response: Monster[] | Monster | undefined) {
+  private log(response: IMonster[] | IMonster | undefined) {
     console.log(response);
   }
 
@@ -18,19 +19,19 @@ export class MonsterService {
     return of(errorValue);
   }
 
-  getMonsterList(): Observable<Monster[]> {
-    return this.http.get<Monster[]>(this.BASE_URL).pipe(
+  getMonsterList(): Observable<IMonster[]> {
+    return this.http.get<IMonster[]>(this.BASE_URL).pipe(
       catchError((error) => this.handleError(error, []))
     );
   }
 
-  getMonsterById(monsterId: string): Observable<Monster | undefined> {
-    return this.http.get<Monster>(`${this.BASE_URL}/${monsterId}`).pipe(
+  getMonsterById(monsterId: string): Observable<IMonster | undefined> {
+    return this.http.get<IMonster>(`${this.BASE_URL}/${monsterId}`).pipe(
       catchError((error) => this.handleError(error, undefined))
     );
   }
 
-  updateMonster(monster: Monster): Observable<Monster | undefined>{
+  updateMonster(monster: IMonster): Observable<IMonster | undefined>{
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };

@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Monster } from '../monster';
+
 import { MonsterService } from '../../_services/monster.service';
+
+import { IMonster } from 'src/app/_interfaces/monster';
 
 @Component({
   selector: 'app-monster-form',
@@ -9,7 +11,7 @@ import { MonsterService } from '../../_services/monster.service';
   styleUrls: ['./monster-form.component.scss']
 })
 export class MonsterFormComponent implements OnInit {
-  @Input() monster: Monster;
+  @Input() monster: IMonster;
   monsterRole: string[];
   monsterRace: string[];
 

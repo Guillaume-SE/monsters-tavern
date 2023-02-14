@@ -1,4 +1,4 @@
-export class Monster {
+export interface IMonster {
     _id: string;
     name: string;
     email: string;

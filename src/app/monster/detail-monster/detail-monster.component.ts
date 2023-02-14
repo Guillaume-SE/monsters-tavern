@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Monster } from '../monster';
 
 import { MonsterService } from '../../_services/monster.service';
 import { TokenService } from 'src/app/_services/token.service';
 import { FollowService } from 'src/app/_services/follow.service';
 
+import { IMonster } from 'src/app/_interfaces/monster';
 import { IFollow } from 'src/app/_interfaces/follow';
 
 @Component({
@@ -14,10 +14,10 @@ import { IFollow } from 'src/app/_interfaces/follow';
 })
 export class DetailMonsterComponent implements OnInit {
 
-  monsterList: Monster[] = [];
+  monsterList: IMonster[] = [];
   followingList: IFollow[] = [];
   followerList: IFollow[] = [];
-  monster: Monster | undefined;
+  monster: IMonster | undefined;
   isLoggedIn: boolean = false;
 
   constructor(
@@ -37,7 +37,7 @@ export class DetailMonsterComponent implements OnInit {
     }
   }
 
-  goToEditMonster(monster: Monster) {
+  goToEditMonster(monster: IMonster) {
     this.router.navigate(['/edit/monster', monster._id]);
   }
 
