@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TokenService {
+export class TokenService implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
+
+  ngOnInit(): void { }
 
   isLogged(): boolean {
     const token = sessionStorage.getItem('token');
@@ -16,16 +19,10 @@ export class TokenService {
   }
 
   saveToken(token: string): void {
-    sessionStorage.setItem('token', token);
-    this.router.navigate(['/monsters'])
+    return sessionStorage.setItem('token', token);
   }
 
-  getToken(): string | null{
+  getToken(): string | null {
     return sessionStorage.getItem('token');
-  }
-
-  deleteToken(): void {
-    sessionStorage.removeItem('token');
-    this.router.navigate(['/monsters']);
   }
 }

@@ -5,8 +5,8 @@ import { MonsterService } from '../../_services/monster.service';
 import { TokenService } from 'src/app/_services/token.service';
 import { FollowService } from 'src/app/_services/follow.service';
 
-import { IMonster } from 'src/app/_interfaces/monster';
-import { IFollow } from 'src/app/_interfaces/follow';
+import { IMonster, IMonsterProfil } from 'src/app/_interfaces/monster';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-detail-monster',
@@ -15,9 +15,11 @@ import { IFollow } from 'src/app/_interfaces/follow';
 export class DetailMonsterComponent implements OnInit {
 
   monsterList: IMonster[] = [];
-  followingList: IFollow[] = [];
-  followerList: IFollow[] = [];
   monster: IMonster | undefined;
+  followingList: IMonsterProfil[] = [];
+  followerList: IMonsterProfil[] = [];
+  followingCount: number;
+  followerCount: number;
   isLoggedIn: boolean = false;
 
   constructor(
@@ -25,15 +27,34 @@ export class DetailMonsterComponent implements OnInit {
     private router: Router,
     private monsterService: MonsterService,
     private tokenService: TokenService,
-    private followService: FollowService
+    private followService: FollowService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
     const monsterId: string | null = this.route.snapshot.paramMap.get('id');
 
+    if (this.tokenService.isLogged()) {
+      this.isLoggedIn = true
+    }
+
     if (monsterId) {
       this.monsterService.getMonsterById(monsterId)
         .subscribe((monster) => this.monster = monster);
+    }
+
+    if (monsterId && this.isLoggedIn) {
+      this.followService.getMonsterFollowingList(monsterId)
+        .subscribe((followingList) => {
+          this.followingList = followingList,
+            this.followingCount = followingList.length;
+        });
+
+      this.followService.getMonsterFollowerList(monsterId)
+        .subscribe((followerList) => {
+          this.followerList = followerList,
+            this.followerCount = followerList.length;
+        });
     }
   }
 
@@ -42,30 +63,26 @@ export class DetailMonsterComponent implements OnInit {
   }
 
   logout() {
-    this.tokenService.deleteToken();
+    this.authService.logout();
   }
 
-  isLogged() {
-    if (this.tokenService.isLogged()) {
-      return true;
-    }
-    return false;
-  }
+  // isLogged() {
+  //   if (this.tokenService.isLogged()) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   showMonsterFollowing() {
-    if (this.isLogged() && this.monster) {
-      this.followService.getMonsterFollowingList(this.monster._id)
-        .subscribe((followingList) => this.followingList = followingList);
-    } else {
-      this.router.navigate(['/login']);
-    }
+    // if (this.isLoggedIn && this.monster) {
+    //   this.followService.getMonsterFollowingList(this.monster._id)
+    //     .subscribe((followingList) => {
+    //       this.followingList = followingList,
+    //       this.followingCount = followingList.length;
+    //     })
+    // } else {
+    //   this.router.navigate(['/login']);
+    // }
   }
-  showMonsterFollower() {
-    if (this.isLogged() && this.monster) {
-      this.followService.getMonsterFollowerList(this.monster._id)
-        .subscribe((followerList) => this.followerList = followerList);
-    } else {
-      this.router.navigate(['/login']);
-    }
-  }
+  showMonsterFollower() { }
 }

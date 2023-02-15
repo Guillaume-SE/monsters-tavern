@@ -1,4 +1,7 @@
 <div>
+    <p>
+        {{ message }}
+    </p>
     <form name="form"
         #loginForm="ngForm"
         (ngSubmit)="loginForm.form.valid && onSubmit()"

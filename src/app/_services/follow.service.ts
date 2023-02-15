@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-import { IFollow } from '../_interfaces/follow';
+import { IMonsterProfil } from '../_interfaces/monster';
 
 @Injectable()
 export class FollowService {
@@ -16,15 +16,11 @@ export class FollowService {
     return of(errorValue);
   }
 
-  getMonsterFollowingList(monsterId: string | null): Observable<IFollow[]> {
-    return this.http.get<IFollow[]>(`${this.BASE_URL}following/${monsterId}`).pipe(
-      catchError((error) => this.handleError(error, undefined))
-    );
+  getMonsterFollowingList(monsterId: string | null): Observable<IMonsterProfil[]> {
+    return this.http.get<IMonsterProfil[]>(`${this.BASE_URL}following/${monsterId}`);
   }
 
-  getMonsterFollowerList(monsterId: string | null): Observable<IFollow[]> {
-    return this.http.get<IFollow[]>(`${this.BASE_URL}followers/${monsterId}`).pipe(
-      catchError((error) => this.handleError(error, undefined))
-    );
+  getMonsterFollowerList(monsterId: string | null): Observable<IMonsterProfil[]> {
+    return this.http.get<IMonsterProfil[]>(`${this.BASE_URL}followers/${monsterId}`);
   }
 }

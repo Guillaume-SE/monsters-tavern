@@ -16,12 +16,15 @@
             Membre depuis {{ monster.created_at | date: "yyyy" }}
         </span>
 
-        <div>
+        <div *ngIf="isLoggedIn">
             <div>
+                <span>
+                    {{ followingCount }}
+                </span>
                 <button (click)="showMonsterFollowing()">
                     Abonnements
                 </button>
-                <div *ngIf="this.followingList.length > 0; else noFollowing">
+
                 <div *ngFor="let following of followingList">
                     <ul>
                         <li>
@@ -30,17 +33,15 @@
                     </ul>
                 </div>
             </div>
-            <ng-template #noFollowing>
-                <span>
-                    Aucun abonnement
-                </span>
-            </ng-template>
-            </div>
+    
             <div>
+                <span>
+                    {{ followerCount }}
+                </span>
                 <button (click)="showMonsterFollower()">
                     Abonnés
                 </button>
-                <div *ngIf="this.followerList.length > 0; else noFollower">
+
                 <div *ngFor="let follower of followerList">
                     <ul>
                         <li>
@@ -48,16 +49,23 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-                <ng-template #noFollower>
-                    <span>
-                        Aucun abonné
-                    </span>
-                </ng-template>
+
             </div>
         </div>
+        <div *ngIf="!isLoggedIn">
+            <p>
+                Pour voir le profil complet
+                <a [routerLink]="['/login']">
+                    Connectez-vous
+                </a>
+                ou
+                <a [routerLink]="['/signup']">
+                    Créer un compte
+                </a>
+            </p>
+        </div>
     </div>
-    <div *ngIf="isLogged()">
+    <div *ngIf="isLoggedIn">
         <div>
             <button (click)="goToEditMonster(monster)">
                 Modifier
