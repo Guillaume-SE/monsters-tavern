@@ -21,6 +21,8 @@ export class DetailMonsterComponent implements OnInit {
   followingCount: number;
   followerCount: number;
   isLoggedIn: boolean = false;
+  showFollowing: boolean = false;
+  showFollower: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,23 +68,10 @@ export class DetailMonsterComponent implements OnInit {
     this.authService.logout();
   }
 
-  // isLogged() {
-  //   if (this.tokenService.isLogged()) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   showMonsterFollowing() {
-    // if (this.isLoggedIn && this.monster) {
-    //   this.followService.getMonsterFollowingList(this.monster._id)
-    //     .subscribe((followingList) => {
-    //       this.followingList = followingList,
-    //       this.followingCount = followingList.length;
-    //     })
-    // } else {
-    //   this.router.navigate(['/login']);
-    // }
+    this.showFollowing = !this.showFollowing;
   }
-  showMonsterFollower() { }
+  showMonsterFollower() {
+    this.showFollower = !this.showFollower;
+  }
 }

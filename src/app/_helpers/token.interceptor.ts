@@ -29,7 +29,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
       return next.handle(clone).pipe(
         catchError(error => {
-          console.log(error, "STATUS =", error.status)
 
           if (error.status === 401) {
             this.authService.logout()

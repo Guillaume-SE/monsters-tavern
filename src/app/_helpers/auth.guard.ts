@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  Router,
-  RouterStateSnapshot
+  Router
 } from '@angular/router';
 
 import { TokenService } from '../_services/token.service';
@@ -18,12 +17,12 @@ export class AuthGuard implements CanActivate {
     private tokenService: TokenService
   ) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot) {
 
     if (this.tokenService.isLogged()) {
       return true;
     }
-    this.router.navigate(['/login'], { queryParams: { redirectUrl: state.url } });
+    this.router.navigate(['/login']);
     return false;
   }
 }

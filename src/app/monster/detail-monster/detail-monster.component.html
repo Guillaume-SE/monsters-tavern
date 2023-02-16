@@ -24,7 +24,7 @@
                 <button (click)="showMonsterFollowing()">
                     Abonnements
                 </button>
-
+            <ng-container *ngIf="showFollowing">
                 <div *ngFor="let following of followingList">
                     <ul>
                         <li>
@@ -32,8 +32,9 @@
                         </li>
                     </ul>
                 </div>
+            </ng-container>
             </div>
-    
+
             <div>
                 <span>
                     {{ followerCount }}
@@ -41,7 +42,7 @@
                 <button (click)="showMonsterFollower()">
                     Abonnés
                 </button>
-
+                <ng-container *ngIf="showFollower">
                 <div *ngFor="let follower of followerList">
                     <ul>
                         <li>
@@ -49,7 +50,7 @@
                         </li>
                     </ul>
                 </div>
-
+            </ng-container>
             </div>
         </div>
         <div *ngIf="!isLoggedIn">
