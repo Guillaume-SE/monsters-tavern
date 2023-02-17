@@ -6,21 +6,19 @@
                 <!-- monster name -->
                 <div class="form-group">
                     <label for="name">Nom</label>
-                    <input type="text" id="name" required
-                        [(ngModel)]="monster.name" name="name" #name="ngModel">
+                    <input type="text" id="name" required [(ngModel)]="monster.name" name="name" #name="ngModel">
 
                     <div [hidden]="name.valid || name.pristine">
-                        Un nom est requis (1-35).
+                        Un nom est requis (1-35)
                     </div>
                 </div>
 
                 <!-- monster email -->
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" id="email" required
-                        [(ngModel)]="monster.email" name="email" #email="ngModel">
+                    <input type="text" id="email" required [(ngModel)]="monster.email" name="email" #email="ngModel">
                     <div [hidden]="email.valid || email.pristine">
-                        Vous devez indiquer une adresse mail valide.
+                        Vous devez indiquer une adresse mail valide
                     </div>
                 </div>
 
@@ -29,14 +27,10 @@
                     <label for="race">Race</label>
                     <p *ngFor="let race of monsterRace">
                         <label>
-                            <input type="radio"
-                                    id="{{ race }}"
-                                    [value]="race"
-                                    [checked]="hasRace(race)"
-                                    
-                                    (change)="selectRace($event, race)" />
+                            <input type="radio" id="{{ race }}" [value]="race" [checked]="hasRace(race)"
+                                (change)="selectRace($event, race)" />
                             <span [attr.for]="race">
-                                    {{ race }}
+                                {{ race }}
                             </span>
                         </label>
                     </p>
@@ -47,14 +41,10 @@
                     <label for="role">Role</label>
                     <p *ngFor="let role of monsterRole">
                         <label>
-                            <input type="radio"
-                                    id="{{ role }}"
-                                    [value]="role"
-                                    [checked]="hasRole(role)"
-                                    
-                                    (change)="selectRole($event, role)" />
+                            <input type="radio" id="{{ role }}" [value]="role" [checked]="hasRole(role)"
+                                (change)="selectRole($event, role)" />
                             <span [attr.for]="role">
-                                    {{ role }}
+                                {{ role }}
                             </span>
                         </label>
                     </p>
@@ -62,7 +52,7 @@
 
                 <!-- Submit button -->
                 <div>
-                    <button type="submit"[disabled]="!monsterForm.form.valid">
+                    <button type="submit" [disabled]="!monsterForm.form.valid">
                         Valider
                     </button>
                 </div>

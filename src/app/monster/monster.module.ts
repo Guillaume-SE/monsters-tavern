@@ -15,7 +15,7 @@ import { MonsterService } from '../_services/monster.service';
 import { FollowService } from '../_services/follow.service';
 const monsterRoutes: Routes = [
   {
-    path: 'edit/monster/:id',
+    path: 'edit/monster/:monsterId',
     component: EditMonsterComponent,
     canActivate: [AuthGuard]
   },
@@ -24,7 +24,7 @@ const monsterRoutes: Routes = [
     component: ListMonstersComponent
   },
   {
-    path: 'monster/:id',
+    path: 'monster/:monsterId',
     component: DetailMonsterComponent
   }
 ];

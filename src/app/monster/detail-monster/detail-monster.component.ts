@@ -34,7 +34,7 @@ export class DetailMonsterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const monsterId: string | null = this.route.snapshot.paramMap.get('id');
+    const monsterId: string | null = this.route.snapshot.paramMap.get('monsterId');
 
     if (this.tokenService.isLogged()) {
       this.isLoggedIn = true

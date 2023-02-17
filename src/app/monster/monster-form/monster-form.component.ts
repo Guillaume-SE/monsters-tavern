@@ -50,12 +50,13 @@ export class MonsterFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.monsterService.updateMonster(this.monster)
-    //   .subscribe((monster) => {
-        // console.log(this.monster, "YO");
-        // if(monster) {
-        //   this.router.navigate(['/monster', this.monster._id])
-        // }
-      // });
+
+    this.monsterService.updateMonster(this.monster)
+      .subscribe((monster) => {
+        console.log(this.monster);
+        if(monster) {
+          this.router.navigate(['/monster', this.monster._id])
+        }
+      });
   }
 }

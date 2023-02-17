@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 
 import { IMonster } from 'src/app/_interfaces/monster';
+import { IApi } from '../_interfaces/api';
 
 @Injectable()
 export class MonsterService {
@@ -25,18 +26,17 @@ export class MonsterService {
     );
   }
 
-  getMonsterById(monsterId: string): Observable<IMonster | undefined> {
+  getMonsterById(monsterId: string | null ): Observable<IMonster> {
     return this.http.get<IMonster>(`${this.BASE_URL}/${monsterId}`).pipe(
       catchError((error) => this.handleError(error, undefined))
     );
   }
 
-  updateMonster(monster: IMonster): Observable<IMonster | undefined>{
+  updateMonster(monster: IMonster): Observable<IApi>{
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.put(`${this.BASE_URL}/update/me`, monster, httpOptions).pipe(
-      tap((response) => console.log(response)),
+    return this.http.put<IApi>(`${this.BASE_URL}/update/${monster._id}`, monster, httpOptions).pipe(
       catchError((error) => this.handleError(error, undefined))
     );
   }
