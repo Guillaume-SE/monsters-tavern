@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { ICredential } from '../_interfaces/credential';
+import { ICredential } from '../../_interfaces/credential';
 
-import { AuthService } from '../_services/auth.service';
-import { TokenService } from '../_services/token.service';
+import { AuthService } from '../../_services/auth.service';
+import { TokenService } from '../../_services/token.service';
 
 
 @Component({

@@ -10,7 +10,7 @@ import { IMonster } from 'src/app/_interfaces/monster';
   templateUrl: './list-monsters.component.html'
 })
 export class ListMonstersComponent implements OnInit {
-  monsterList: IMonster[] | undefined;
+  monsterList: IMonster[] = [];
 
   constructor(
     private router: Router,
