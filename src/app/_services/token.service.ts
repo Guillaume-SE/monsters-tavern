@@ -20,11 +20,12 @@ export class TokenService implements OnInit {
     return sessionStorage.setItem('token', token);
   }
 
-  getToken(): IToken | null {
-    return sessionStorage.getItem('token');
+  getToken(): string | null {
+    const token = sessionStorage.getItem('token');
+    return token;
   }
 
-  decodeToken(token: IToken): IDecodedToken {
+  decodeToken(token: string | null): IDecodedToken {
     const id: string = jwt_decode(String(token));
     return { id };
   }
