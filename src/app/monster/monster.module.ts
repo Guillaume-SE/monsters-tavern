@@ -7,7 +7,6 @@ import { AuthGuard } from '../_helpers/auth.guard';
 
 import { ListMonstersComponent } from './list-monsters/list-monsters.component';
 import { DetailMonsterComponent } from './detail-monster/detail-monster.component';
-import { MonsterFormComponent } from './monster-form/monster-form.component';
 import { EditMonsterComponent } from './edit-monster/edit-monster.component';
 import { LoaderComponent } from '../_utils/loader/loader.component';
 
@@ -33,7 +32,6 @@ const monsterRoutes: Routes = [
   declarations: [
     ListMonstersComponent,
     DetailMonsterComponent,
-    MonsterFormComponent,
     EditMonsterComponent,
     LoaderComponent
   ],

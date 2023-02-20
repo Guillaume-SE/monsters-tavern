@@ -1,15 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import jwt_decode from "jwt-decode";
+import { IDecodedToken, IToken } from '../_interfaces/token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService implements OnInit {
 
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) { }
+  constructor() { }
 
   ngOnInit(): void { }
 
@@ -22,7 +20,12 @@ export class TokenService implements OnInit {
     return sessionStorage.setItem('token', token);
   }
 
-  getToken(): string | null {
+  getToken(): IToken | null {
     return sessionStorage.getItem('token');
+  }
+
+  decodeToken(token: IToken): IDecodedToken {
+    const id: string = jwt_decode(String(token));
+    return { id };
   }
 }

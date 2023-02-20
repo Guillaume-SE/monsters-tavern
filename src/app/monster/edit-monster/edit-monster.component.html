@@ -21,7 +21,13 @@
                 <!-- monster email -->
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" id="email" required [(ngModel)]="monster.email" name="email" #email="ngModel">
+                    <input type="text" id="email"
+                            required
+                            [(ngModel)]="monster.email"
+                            email="true"
+                            name="email"
+                            #email="ngModel"
+                            >
                     <div [hidden]="email.valid || email.pristine">
                         Vous devez indiquer une adresse mail valide
                     </div>

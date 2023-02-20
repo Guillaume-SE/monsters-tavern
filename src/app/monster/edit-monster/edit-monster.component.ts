@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MonsterService } from '../../_services/monster.service';
@@ -10,7 +10,7 @@ import { IMonster } from 'src/app/_interfaces/monster';
   templateUrl: './edit-monster.component.html',
   styleUrls: ['./edit-monster.component.scss']
 })
-export class EditMonsterComponent {
+export class EditMonsterComponent implements OnInit {
   @Input() monster: IMonster;
   monsterRole: string[];
   monsterRace: string[];
@@ -57,13 +57,11 @@ export class EditMonsterComponent {
   }
 
   onSubmit() {
-    // this.monsterService.updateMonster(this.monster)
-    //   .subscribe((monster) => {
-    //     console.log(this.monster);
-    //     if(monster) {
-    //       this.router.navigate(['/monster', this.monster._id])
-    //     }
-    //   });
-    console.log(this.monster)
+    this.monsterService.updateMonster(this.monster)
+      .subscribe((monster) => {
+        if(monster) {
+          this.router.navigate(['/monster', this.monster._id])
+        }
+      });
   }
 }

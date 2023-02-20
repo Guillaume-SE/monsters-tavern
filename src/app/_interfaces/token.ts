@@ -1,3 +1,7 @@
 export interface IToken {
-    token: string
+    token: string;
+}
+
+export interface IDecodedToken {
+    id: string;
 }
