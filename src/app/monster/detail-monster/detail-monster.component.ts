@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MonsterService } from '../../_services/monster.service';
 import { TokenService } from 'src/app/_services/token.service';
 import { FollowService } from 'src/app/_services/follow.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 import { IMonster, IMonsterProfil } from 'src/app/_interfaces/monster';
-import { AuthService } from 'src/app/_services/auth.service';
+import { IDecodedToken } from 'src/app/_interfaces/token';
 
 @Component({
   selector: 'app-detail-monster',
@@ -14,13 +15,14 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class DetailMonsterComponent implements OnInit {
 
-  monsterList: IMonster[] = [];
   monster: IMonster | undefined;
+  monsterProfilId: string | null;
   followingList: IMonsterProfil[] = [];
   followerList: IMonsterProfil[] = [];
   followingCount: number;
   followerCount: number;
   isLoggedIn: boolean = false;
+  loggedMonsterId: IDecodedToken['id'];
   showFollowing: boolean = false;
   showFollower: boolean = false;
 
@@ -34,30 +36,48 @@ export class DetailMonsterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const monsterId: string | null = this.route.snapshot.paramMap.get('monsterId');
+    this.monsterProfilId = this.route.snapshot.paramMap.get('monsterId');
 
-    if (this.tokenService.isLogged()) {
-      this.isLoggedIn = true
+    if (this.isLogged()) {
+      const token = this.tokenService.getToken();
+      if (token) {
+        const decodeToken = this.tokenService.decodeToken(token);
+        this.loggedMonsterId = decodeToken;
+      }
     }
 
-    if (monsterId) {
-      this.monsterService.getMonsterById(monsterId)
+    if (this.monsterProfilId) {
+      this.monsterService.getMonsterById(this.monsterProfilId)
         .subscribe((monster) => this.monster = monster);
     }
 
-    if (monsterId && this.isLoggedIn) {
-      this.followService.getMonsterFollowingList(monsterId)
+    if (this.monsterProfilId && this.isLogged()) {
+      this.followService.getMonsterFollowingList(this.monsterProfilId)
         .subscribe((followingList) => {
           this.followingList = followingList,
             this.followingCount = followingList.length;
         });
 
-      this.followService.getMonsterFollowerList(monsterId)
+      this.followService.getMonsterFollowerList(this.monsterProfilId)
         .subscribe((followerList) => {
           this.followerList = followerList,
             this.followerCount = followerList.length;
         });
     }
+  }
+
+  isLogged() {
+    if(this.tokenService.isLogged()) {
+      return true;
+    }
+    return false;
+  }
+
+  onHisProfil() {
+    if(this.monsterProfilId === this.loggedMonsterId) {
+      return true;
+    }
+    return false;
   }
 
   goToEditMonster(monster: IMonster) {

@@ -5,7 +5,7 @@ import { PageNotFoundComponent } from './_utils/page-not-found/page-not-found.co
 import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'monsters', pathMatch: 'full' },
+  { path: '', redirectTo: 'home/monsters', pathMatch: 'full' },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent }

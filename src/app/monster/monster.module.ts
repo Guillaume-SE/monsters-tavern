@@ -12,6 +12,7 @@ import { LoaderComponent } from '../_utils/loader/loader.component';
 
 import { MonsterService } from '../_services/monster.service';
 import { FollowService } from '../_services/follow.service';
+
 const monsterRoutes: Routes = [
   {
     path: 'edit/monster/:monsterId',
@@ -19,11 +20,11 @@ const monsterRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'monsters',
+    path: 'home/monsters',
     component: ListMonstersComponent
   },
   {
-    path: 'monster/:monsterId',
+    path: 'monster/profil/:monsterId',
     component: DetailMonsterComponent
   }
 ];

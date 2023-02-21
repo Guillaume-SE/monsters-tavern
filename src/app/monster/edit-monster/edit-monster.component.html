@@ -1,15 +1,16 @@
 <h2>Modifier votre profil</h2>
 
-<div *ngIf="monster">
-    <img [src]="monster.avatar" alt="">
+<div *ngIf="onHisProfil()">
+    <div *ngIf="monster">
+        <img [src]="monster.avatar" alt="">
 
-<form (ngSubmit)="onSubmit()" #monsterForm="ngForm">
-    <div class="row">
-        <div class="col s8 offset-s2">
-            <div class="card-panel">
+    <form (ngSubmit)="onSubmit()" #monsterForm="ngForm">
+    <div>
+        <div>
+            <div>
 
                 <!-- monster name -->
-                <div class="form-group">
+                <div>
                     <label for="name">Nom</label>
                     <input type="text" id="name" required [(ngModel)]="monster.name" name="name" #name="ngModel">
 
@@ -19,7 +20,7 @@
                 </div>
 
                 <!-- monster email -->
-                <div class="form-group">
+                <div>
                     <label for="email">Email</label>
                     <input type="text" id="email"
                             required
@@ -34,32 +35,40 @@
                 </div>
 
                 <!-- monster race -->
-                <form>
+                <div>
                     <label for="race">Race</label>
                     <p *ngFor="let race of monsterRace">
                         <label>
-                            <input type="radio" id="{{ race }}" [value]="race" [checked]="hasRace(race)"
-                                (change)="selectRace($event, race)" />
+                            <input type="radio"
+                                    id="{{ race }}"
+                                    [value]="race"
+                                    [checked]="hasRace(race)"
+                                    (change)="selectRace($event, race)"
+                                />
                             <span [attr.for]="race">
                                 {{ race }}
                             </span>
                         </label>
                     </p>
-                </form>
+                </div>
 
                 <!-- monster role -->
-                <form>
+                <div>
                     <label for="role">Role</label>
                     <p *ngFor="let role of monsterRole">
                         <label>
-                            <input type="radio" id="{{ role }}" [value]="role" [checked]="hasRole(role)"
-                                (change)="selectRole($event, role)" />
+                            <input type="radio"
+                                    id="{{ role }}"
+                                    [value]="role"
+                                    [checked]="hasRole(role)"
+                                    (change)="selectRole($event, role)"
+                                />
                             <span [attr.for]="role">
                                 {{ role }}
                             </span>
                         </label>
                     </p>
-                </form>
+                </div>
 
                 <!-- Submit button -->
                 <div>
@@ -72,5 +81,6 @@
         </div>
     </div>
 </form>
+</div>
 </div>
 <h3 *ngIf="!monster">Aucun monstre à éditer...</h3>

@@ -1,11 +1,11 @@
 <nav>
     <div>
-        <a [routerLink]="['/monsters']">
+        <a [routerLink]="['home/monsters']">
             Accueil
         </a>
     </div>
     <div *ngIf="isLogged()">
-        <a href="">
+        <a [routerLink]="['/monster/profil/', loggedMonsterId]">
             Mon compte
         </a>
     </div>

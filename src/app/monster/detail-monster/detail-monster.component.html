@@ -16,7 +16,7 @@
             Membre depuis {{ monster.created_at | date: "yyyy" }}
         </span>
 
-        <div *ngIf="isLoggedIn">
+        <div *ngIf="isLogged()">
             <div>
                 <span>
                     {{ followingCount }}
@@ -53,7 +53,7 @@
             </ng-container>
             </div>
         </div>
-        <div *ngIf="!isLoggedIn">
+        <div *ngIf="!isLogged()">
             <p>
                 Pour voir le profil complet
                 <a [routerLink]="['/login']">
@@ -66,7 +66,7 @@
             </p>
         </div>
     </div>
-    <div *ngIf="isLoggedIn">
+    <div *ngIf="onHisProfil()">
         <div>
             <button (click)="goToEditMonster(monster)">
                 Modifier

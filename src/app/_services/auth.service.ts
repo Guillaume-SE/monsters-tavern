@@ -23,6 +23,6 @@ export class AuthService {
 
   logout() {
     sessionStorage.removeItem('token');
-    this.router.navigate(['/monsters']);
+    this.router.navigate(['home/monsters']);
   }
 }

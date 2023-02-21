@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MonsterService } from '../../_services/monster.service';
 
 import { IMonster } from 'src/app/_interfaces/monster';
+import { IDecodedToken } from 'src/app/_interfaces/token';
+import { TokenService } from 'src/app/_services/token.service';
 
 @Component({
   selector: 'app-edit-monster',
@@ -14,22 +16,49 @@ export class EditMonsterComponent implements OnInit {
   @Input() monster: IMonster;
   monsterRole: string[];
   monsterRace: string[];
+  monsterProfilId: string | null;
+  loggedMonsterId: IDecodedToken['id'];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private monsterService: MonsterService
+    private monsterService: MonsterService,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit() {
-    const monsterId: string | null = this.route.snapshot.paramMap.get('monsterId');
-    if (monsterId) {
-      this.monsterService.getMonsterById(monsterId)
+    this.monsterProfilId = this.route.snapshot.paramMap.get('monsterId');
+
+    if (this.monsterProfilId) {
+      this.monsterService.getMonsterById(this.monsterProfilId)
         .subscribe(monster => this.monster = monster);
+    }
+
+    if (this.isLogged()) {
+      const token = this.tokenService.getToken();
+      if (token) {
+        const decodeToken = this.tokenService.decodeToken(token);
+        this.loggedMonsterId = decodeToken;
+      }
     }
 
     this.monsterRole = this.monsterService.getMonsterRoleList();
     this.monsterRace = this.monsterService.getMonsterRaceList();
+  }
+
+  isLogged() {
+    if(this.tokenService.isLogged()) {
+      return true;
+    }
+    return false;
+  }
+
+  onHisProfil() {
+    if (this.monsterProfilId == this.loggedMonsterId) {
+      return true;
+    }
+    this.router.navigate(['home/monsters']);
+    return false;
   }
 
   hasRole(role: string): boolean {
@@ -59,8 +88,8 @@ export class EditMonsterComponent implements OnInit {
   onSubmit() {
     this.monsterService.updateMonster(this.monster)
       .subscribe((monster) => {
-        if(monster) {
-          this.router.navigate(['/monster', this.monster._id])
+        if (monster) {
+          this.router.navigate(['/monster/profil/', this.monster._id])
         }
       });
   }

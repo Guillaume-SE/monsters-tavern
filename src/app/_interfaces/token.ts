@@ -3,5 +3,7 @@ export interface IToken {
 }
 
 export interface IDecodedToken {
+    exp: number;
+    iat: number;
     id: string;
 }
