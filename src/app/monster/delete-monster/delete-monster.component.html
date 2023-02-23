@@ -1,1 +1,15 @@
-<p>delete-monster works!</p>
+<div *ngIf="onHisProfil()">
+    <div>
+        <p>
+            Voulez-vous supprimez définitivement votre compte ?
+        </p>
+    </div>
+    <div>
+        <button (click)="goToMonsterProfil()">
+            Retour
+        </button>
+        <button (click)="deleteMonster()">
+            Oui
+        </button>
+    </div>
+</div>

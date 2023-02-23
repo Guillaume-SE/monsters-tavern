@@ -1,7 +1,7 @@
 <div *ngIf="monster">
     <h2>{{ monster.name }}</h2>
     <div>
-        <img [src]="monster.avatar" alt="">
+        <img class="avatar" [src]="monster.avatar" alt="">
     </div>
     <div>
         <ul>
@@ -68,13 +68,18 @@
     </div>
     <div *ngIf="onHisProfil()">
         <div>
-            <button (click)="goToEditMonster(monster)">
+            <button (click)="goToEditMonster()">
                 Modifier
             </button>
         </div>
         <div>
             <button (click)="logout()">
                 Deconnexion
+            </button>
+        </div>
+        <div>
+            <button (click)="goToDeleteMonster()">
+                Supprimer mon compte
             </button>
         </div>
     </div>

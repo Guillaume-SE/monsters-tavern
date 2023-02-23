@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { MonsterService } from '../../_services/monster.service';
+import { TokenService } from 'src/app/_services/token.service';
 
 import { IMonster } from 'src/app/_interfaces/monster';
 import { IDecodedToken } from 'src/app/_interfaces/token';
-import { TokenService } from 'src/app/_services/token.service';
 
 @Component({
   selector: 'app-edit-monster',
@@ -14,8 +14,8 @@ import { TokenService } from 'src/app/_services/token.service';
 })
 export class EditMonsterComponent implements OnInit {
   @Input() monster: IMonster;
-  monsterRole: string[];
-  monsterRace: string[];
+  monsterRole: Array<string>;
+  monsterRace: Array<string>;
   monsterProfilId: string | null;
   loggedMonsterId: IDecodedToken['id'];
 

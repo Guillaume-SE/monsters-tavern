@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of, tap } from 'rxjs';
+
 import { ICredential } from '../_interfaces/credential';
+import { INewMonster } from '../_interfaces/monster';
 import { IToken } from '../_interfaces/token';
 
 @Injectable({
@@ -10,7 +12,7 @@ import { IToken } from '../_interfaces/token';
 })
 export class AuthService {
 
-  LOGIN_URL: string = 'http://localhost:3000/login';
+  BASE_URL: string = 'http://localhost:3000/';
 
   constructor(
     private router: Router,
@@ -18,11 +20,15 @@ export class AuthService {
   ) { }
 
   login(credentials: ICredential): Observable<IToken> {
-    return this.http.post<IToken>(this.LOGIN_URL, credentials)
+    return this.http.post<IToken>(`${this.BASE_URL}login`, credentials);
   }
 
   logout() {
     sessionStorage.removeItem('token');
     this.router.navigate(['home/monsters']);
+  }
+
+  signup(monster: INewMonster): Observable<IToken> {
+    return this.http.post<IToken>(`${this.BASE_URL}signup`, monster);
   }
 }

@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     return false;
   }
 
-  goToMonsterProfil(monsterId: string) {
-    this.router.navigate(['/monster/profil', monsterId]);
-  }
+  // goToMonsterProfil(monsterId: string) {
+  //   this.router.navigate(['/monster/profil', monsterId]);
+  // }
 }

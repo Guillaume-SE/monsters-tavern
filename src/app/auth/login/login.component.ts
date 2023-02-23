@@ -28,10 +28,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit() {
+    this.message = "Tentative de connexion...";
     this.authService.login(this.form)
       .subscribe({
         next: data => {
           this.tokenService.saveToken(data.token);
+          this.message = "Connexion réussie";
           this.location.back();
         },
         error: error => {

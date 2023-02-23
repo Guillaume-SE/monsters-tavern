@@ -11,3 +11,12 @@ export interface IMonster extends IMonsterProfil {
     created_at: Date;
     updated_at: Date;
 }
+
+export interface INewMonster {
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    race: string;
+    avatar: string;
+}

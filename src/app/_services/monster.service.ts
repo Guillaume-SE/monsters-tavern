@@ -41,7 +41,13 @@ export class MonsterService {
     );
   }
 
-  getMonsterRoleList(): string[] {
+  deleteAccount(monsterId: string) {
+    return this.http.delete(`${this.BASE_URL}/delete/${monsterId}`).pipe(
+      catchError((error) => this.handleError(error, undefined))
+    );
+  }
+
+  getMonsterRoleList(): Array<string> {
     return [
       "Alchimiste",
       "Archer",
@@ -54,7 +60,7 @@ export class MonsterService {
     ]
   }
 
-  getMonsterRaceList(): string[] {
+  getMonsterRaceList(): Array<string> {
     return [
       "Démon",
       "Lycanthrope",
