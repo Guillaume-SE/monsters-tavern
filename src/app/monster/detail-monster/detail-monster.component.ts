@@ -81,7 +81,7 @@ export class DetailMonsterComponent implements OnInit {
   }
 
   goToEditMonster(monster: IMonster) {
-    this.router.navigate(['/edit/monster', monster._id]);
+    this.router.navigate(['monster/edit', monster._id]);
   }
 
   logout() {

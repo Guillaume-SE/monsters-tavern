@@ -9,14 +9,20 @@ import { ListMonstersComponent } from './list-monsters/list-monsters.component';
 import { DetailMonsterComponent } from './detail-monster/detail-monster.component';
 import { EditMonsterComponent } from './edit-monster/edit-monster.component';
 import { LoaderComponent } from '../_utils/loader/loader.component';
+import { DeleteMonsterComponent } from './delete-monster/delete-monster.component';
 
 import { MonsterService } from '../_services/monster.service';
 import { FollowService } from '../_services/follow.service';
 
 const monsterRoutes: Routes = [
   {
-    path: 'edit/monster/:monsterId',
+    path: 'monster/edit/:monsterId',
     component: EditMonsterComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'monster/delete/:monsterId',
+    component: DeleteMonsterComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -34,6 +40,7 @@ const monsterRoutes: Routes = [
     ListMonstersComponent,
     DetailMonsterComponent,
     EditMonsterComponent,
+    DeleteMonsterComponent,
     LoaderComponent
   ],
   imports: [
