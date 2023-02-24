@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 
-import { IMonster } from 'src/app/_interfaces/monster';
+import { IMonster, IMonsterProfil } from 'src/app/_interfaces/monster';
 import { TokenService } from './token.service';
 
 @Injectable()
@@ -35,8 +35,8 @@ export class MonsterService {
     );
   }
 
-  updateMonster(monster: IMonster): Observable<IMonster> {
-    return this.http.patch<IMonster>(`${this.BASE_URL}/update/${monster._id}`, monster).pipe(
+  updateMonster(monster: IMonsterProfil): Observable<IMonsterProfil> {
+    return this.http.patch<IMonsterProfil>(`${this.BASE_URL}/update/${monster._id}`, monster).pipe(
       catchError((error) => this.handleError(error, undefined))
     );
   }
@@ -71,6 +71,21 @@ export class MonsterService {
       "Dragon",
       "Harpie",
       "Goule"
+    ]
+  }
+
+  getAvatarList(): Array<string> {
+    return [
+      "demon",
+      "werewolf",
+      "dragon",
+      "elf",
+      "tree",
+      "yeti",
+      "orc",
+      "gorgon",
+      "minotaur",
+      "reaper"
     ]
   }
 }

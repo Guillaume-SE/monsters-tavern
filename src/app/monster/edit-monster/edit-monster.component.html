@@ -1,8 +1,8 @@
 <h2>Modifier votre profil</h2>
 
 <div *ngIf="onHisProfil()">
-    <div *ngIf="monster">
-        <img [src]="monster.avatar" alt="">
+    <div *ngIf="form">
+        <img class="avatar" [src]="form.avatar" alt="">
 
     <form (ngSubmit)="onSubmit()" #monsterForm="ngForm">
     <div>
@@ -12,62 +12,126 @@
                 <!-- monster name -->
                 <div>
                     <label for="name">Nom</label>
-                    <input type="text" id="name" required [(ngModel)]="monster.name" name="name" #name="ngModel">
-
-                    <div [hidden]="name.valid || name.pristine">
+                    <input type="text"
+                            id="name"
+                            [(ngModel)]="form.name"
+                            name="name"
+                            #name="ngModel"
+                            required
+                            autocomplete="off"
+                        >
+                    <span [hidden]="name.valid || name.pristine">
                         Un nom est requis (1-35)
-                    </div>
+                    </span>
                 </div>
 
                 <!-- monster email -->
                 <div>
                     <label for="email">Email</label>
                     <input type="text" id="email"
-                            required
-                            [(ngModel)]="monster.email"
+                            [(ngModel)]="form.email"
                             email="true"
                             name="email"
                             #email="ngModel"
-                            >
-                    <div [hidden]="email.valid || email.pristine">
+                            required
+                        >
+                    <span [hidden]="email.valid || email.pristine">
                         Vous devez indiquer une adresse mail valide
-                    </div>
+                    </span>
                 </div>
 
                 <!-- monster race -->
                 <div>
-                    <label for="race">Race</label>
-                    <p *ngFor="let race of monsterRace">
-                        <label>
-                            <input type="radio"
-                                    id="{{ race }}"
-                                    [value]="race"
-                                    [checked]="hasRace(race)"
-                                    (change)="selectRace($event, race)"
-                                />
-                            <span [attr.for]="race">
-                                {{ race }}
-                            </span>
-                        </label>
-                    </p>
+                    <label for="race">Indiquez votre race</label>
+                    <select name="race"
+                            id="race-select"
+                            [(ngModel)]="form.race"
+                            required
+                        >
+                        <option value="" disabled>
+                            --Choisissez une option--
+                        </option>
+                        <option value="Démon">
+                            Démon
+                        </option>
+                        <option value="Lycanthrope">
+                            Lycanthrope
+                        </option>
+                        <option value="Vampire">
+                            Vampire
+                        </option>
+                        <option value="Orc">
+                            Orc
+                        </option>
+                        <option value="Gobelin">
+                            Gobelin
+                        </option>
+                        <option value="Elfe">
+                            Elfe
+                        </option>
+                        <option value="Dragon">
+                            Dragon
+                        </option>
+                        <option value="Harpie">
+                            Harpie
+                        </option>
+                        <option value="Goule">
+                            Goule
+                        </option>
+                    </select>
                 </div>
 
                 <!-- monster role -->
                 <div>
-                    <label for="role">Role</label>
-                    <p *ngFor="let role of monsterRole">
-                        <label>
-                            <input type="radio"
-                                    id="{{ role }}"
-                                    [value]="role"
-                                    [checked]="hasRole(role)"
-                                    (change)="selectRole($event, role)"
-                                />
-                            <span [attr.for]="role">
-                                {{ role }}
-                            </span>
-                        </label>
+                    <label for="role">Indiquez votre role</label>
+                    <select name="role"
+                            id="role-select"
+                            [(ngModel)]="form.role"
+                            required
+                        >
+                        <option value="" disabled>
+                            --Choisissez une option--
+                        </option>
+                        <option value="Alchimiste">
+                            Alchimiste
+                        </option>
+                        <option value="Archer">
+                            Archer
+                        </option>
+                        <option value="Assassin">
+                            Assassin
+                        </option>
+                        <option value="Espion">
+                            Espion
+                        </option>
+                        <option value="Guerrier">
+                            Guerrier
+                        </option>
+                        <option value="Necromancien">
+                            Necromancien
+                        </option>
+                        <option value="Soigneur">
+                            Soigneur
+                        </option>
+                        <option value="Sorcier">
+                            Sorcier
+                        </option>
+                    </select>
+                </div>
+
+                <!-- monster avatar  -->
+                <div class="select-avatar">
+                    <p class="select-avatar_text">
+                        Choisissez votre avatar
                     </p>
+                    <div class="select-avatar_avatar-box"
+                        name="avatar"
+                        (click)="selectThisAvatar(avatar)"
+                        [attr.data-avatar]="avatar"
+                        *ngFor="let avatar of avatarList"
+                    >
+                        <img class="avatar" src="./assets/avatar/{{avatar}}.svg" alt="">
+                    </div>
                 </div>
 
                 <!-- Submit button -->
@@ -83,4 +147,4 @@
 </form>
 </div>
 </div>
-<h3 *ngIf="!monster">Aucun monstre à éditer...</h3>
+<h3 *ngIf="!form">Aucun monstre à éditer...</h3>

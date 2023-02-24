@@ -8,8 +8,8 @@ export interface IMonsterProfil {
 
 export interface IMonster extends IMonsterProfil {
     email: string;
-    created_at: Date;
-    updated_at: Date;
+    created_at?: Date | null;
+    updated_at?: Date | null;
 }
 
 export interface INewMonster {

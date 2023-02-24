@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MonsterService } from '../../_services/monster.service';
 import { TokenService } from 'src/app/_services/token.service';
 
-import { IMonster } from 'src/app/_interfaces/monster';
+import { IMonster, IMonsterProfil, INewMonster } from 'src/app/_interfaces/monster';
 import { IDecodedToken } from 'src/app/_interfaces/token';
 
 @Component({
@@ -13,11 +13,22 @@ import { IDecodedToken } from 'src/app/_interfaces/token';
   styleUrls: ['./edit-monster.component.scss']
 })
 export class EditMonsterComponent implements OnInit {
-  @Input() monster: IMonster;
-  monsterRole: Array<string>;
-  monsterRace: Array<string>;
+
+  form: IMonster = {
+    _id: '',
+    name: '',
+    email: '',
+    race: '',
+    role: '',
+    avatar: '',
+    created_at: null,
+    updated_at: null
+  }
   monsterProfilId: string | null;
+  avatarList: Array<string> = [];
   loggedMonsterId: IDecodedToken['id'];
+  BASE_PATH: string = "./assets/avatar/";
+  PATH_EXT: string = ".svg";
 
   constructor(
     private route: ActivatedRoute,
@@ -28,10 +39,11 @@ export class EditMonsterComponent implements OnInit {
 
   ngOnInit() {
     this.monsterProfilId = this.route.snapshot.paramMap.get('monsterId');
+    this.avatarList = this.monsterService.getAvatarList();
 
     if (this.monsterProfilId) {
       this.monsterService.getMonsterById(this.monsterProfilId)
-        .subscribe(monster => this.monster = monster);
+        .subscribe(monster => this.form = monster);
     }
 
     if (this.isLogged()) {
@@ -41,13 +53,10 @@ export class EditMonsterComponent implements OnInit {
         this.loggedMonsterId = decodeToken;
       }
     }
-
-    this.monsterRole = this.monsterService.getMonsterRoleList();
-    this.monsterRace = this.monsterService.getMonsterRaceList();
   }
 
   isLogged() {
-    if(this.tokenService.isLogged()) {
+    if (this.tokenService.isLogged()) {
       return true;
     }
     return false;
@@ -61,35 +70,27 @@ export class EditMonsterComponent implements OnInit {
     return false;
   }
 
-  hasRole(role: string): boolean {
-    return this.monster.role.includes(role);
+  selectThisAvatar(avatarName: string) {
+    const fullpath = `${this.BASE_PATH}${avatarName}${this.PATH_EXT}`;
+    this.form.avatar = fullpath;
   }
-
-  hasRace(race: string): boolean {
-    return this.monster.race.includes(race);
-  }
-
-  selectRole($event: Event, role: string) {
-    const isChecked: boolean = ($event.target as HTMLInputElement).checked;
-
-    if (isChecked) {
-      this.monster.role = role;
-    }
-  }
-
-  selectRace($event: Event, race: string) {
-    const isChecked: boolean = ($event.target as HTMLInputElement).checked;
-
-    if (isChecked) {
-      this.monster.race = race;
-    }
-  }
-
+  
   onSubmit() {
-    this.monsterService.updateMonster(this.monster)
+    const allValidPaths = this.avatarList.map(avatarName => {
+      return `${this.BASE_PATH}${avatarName}${this.PATH_EXT}`
+    });
+
+    const isValid = allValidPaths.includes(this.form.avatar)
+
+    if (!isValid) {
+      const randomPath = allValidPaths[Math.floor(Math.random() * allValidPaths.length)];
+      this.form.avatar = randomPath;
+    }
+
+    this.monsterService.updateMonster(this.form)
       .subscribe((monster) => {
         if (monster) {
-          this.router.navigate(['/monster/profil/', this.monster._id])
+          this.router.navigate(['/monster/profil/', this.form._id])
         }
       });
   }

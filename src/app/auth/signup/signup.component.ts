@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { INewMonster } from 'src/app/_interfaces/monster';
 
 import { AuthService } from 'src/app/_services/auth.service';
+import { MonsterService } from 'src/app/_services/monster.service';
 import { TokenService } from 'src/app/_services/token.service';
 
 @Component({
@@ -14,19 +15,7 @@ import { TokenService } from 'src/app/_services/token.service';
 export class SignupComponent implements OnInit {
 
   message: string = "Inscrivez-vous";
-  avatarList: Array<string> = 
-    [
-      "demon",
-      "werewolf",
-      "dragon",
-      "elf",
-      "tree",
-      "yeti",
-      "orc",
-      "gorgon",
-      "minotaur",
-      "reaper"
-    ];
+  avatarList: Array<string> = [];
   form: INewMonster = {
     name: '',
     email: '',
@@ -39,10 +28,13 @@ export class SignupComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private tokenService: TokenService,
+    private monsterService: MonsterService,
     private router: Router
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.avatarList = this.monsterService.getAvatarList();
+  }
 
   selectThisAvatar(pathName: string) {
     const BASE_PATH = "./assets/avatar/";
