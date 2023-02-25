@@ -74,20 +74,27 @@ export class EditMonsterComponent implements OnInit {
     const fullpath = `${this.BASE_PATH}${avatarName}${this.PATH_EXT}`;
     this.form.avatar = fullpath;
   }
-  
-  onSubmit() {
+
+  ensureValidityOfPath(path: string): string {
     const allValidPaths = this.avatarList.map(avatarName => {
       return `${this.BASE_PATH}${avatarName}${this.PATH_EXT}`
     });
 
-    const isValid = allValidPaths.includes(this.form.avatar)
+    const isValid = allValidPaths.includes(path);
 
-    if (!isValid) {
-      const randomPath = allValidPaths[Math.floor(Math.random() * allValidPaths.length)];
-      this.form.avatar = randomPath;
+    if(isValid) {
+      return path;
     }
 
-    this.monsterService.updateMonster(this.form)
+    return allValidPaths[Math.floor(Math.random() * allValidPaths.length)];
+  }
+
+  onSubmit() {
+
+    this.monsterService.updateMonster({
+        ...this.form,
+        avatar: this.ensureValidityOfPath(this.form.avatar)
+      })
       .subscribe((monster) => {
         if (monster) {
           this.router.navigate(['/monster/profil/', this.form._id])
