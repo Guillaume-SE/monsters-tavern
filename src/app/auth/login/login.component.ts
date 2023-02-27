@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     private location: Location
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(){ }
 
   onSubmit() {
     this.message = "Tentative de connexion...";

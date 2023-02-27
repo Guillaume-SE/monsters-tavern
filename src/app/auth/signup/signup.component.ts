@@ -24,6 +24,8 @@ export class SignupComponent implements OnInit {
     race: '',
     avatar: ''
   }
+  BASE_PATH: string = "./assets/avatar/";
+  PATH_EXT: string = ".svg";
 
   constructor(
     private authService: AuthService,
@@ -36,15 +38,30 @@ export class SignupComponent implements OnInit {
     this.avatarList = this.monsterService.getAvatarList();
   }
 
-  selectThisAvatar(pathName: string) {
-    const BASE_PATH = "./assets/avatar/";
-    const EXT = ".svg";
-    const fullpath = `${BASE_PATH}${pathName}${EXT}`;
+  selectThisAvatar(avatarName: string) {
+    const fullpath = `${this.BASE_PATH}${avatarName}${this.PATH_EXT}`;
     this.form.avatar = fullpath;
   }
 
+  ensureValidityOfPath(path: string): string {
+    const allValidPaths = this.avatarList.map(avatarName => {
+      return `${this.BASE_PATH}${avatarName}${this.PATH_EXT}`
+    });
+
+    const isValid = allValidPaths.includes(path);
+
+    if (isValid) {
+      return path;
+    }
+
+    return allValidPaths[Math.floor(Math.random() * allValidPaths.length)];
+  }
+
   onSubmit() {
-    this.authService.signup(this.form)
+    this.authService.signup({
+      ...this.form,
+      avatar: this.ensureValidityOfPath(this.form.avatar)
+    })
       .subscribe({
         next: data => {
           this.tokenService.saveToken(data.token);

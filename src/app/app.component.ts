@@ -16,25 +16,20 @@ export class AppComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-
-    if (this.isLogged()) {
-      const token = this.tokenService.getToken();
-      if (token) {
-        const decodeToken = this.tokenService.decodeToken(token);
-        this.loggedMonsterId = decodeToken;
-      }
-    }
-  }
+  ngOnInit() {}
 
   isLogged() {
-    if(this.tokenService.isLogged()) {
+    if (this.tokenService.isLogged()) {
       return true;
     }
     return false;
   }
 
-  // goToMonsterProfil(monsterId: string) {
-  //   this.router.navigate(['/monster/profil', monsterId]);
-  // }
+  getMonsterLoggedId() {
+    const token = this.tokenService.getToken();
+    if (this.isLogged() && token) {
+      const decodeToken = this.tokenService.decodeToken(token);
+      return decodeToken;
+    } return undefined;
+  }
 }

@@ -98,8 +98,8 @@
                             <option value="Guerrier">
                                 Guerrier
                             </option>
-                            <option value="Necromancien">
-                                Necromancien
+                            <option value="Nécromancien">
+                                Nécromancien
                             </option>
                             <option value="Soigneur">
                                 Soigneur
@@ -116,6 +116,8 @@
                             Choisissez votre avatar
                         </p>
                         <div (click)="selectThisAvatar(avatar)"
+                            class="select-avatar_avatar-box"
+                            name="avatar"
                             [attr.data-avatar]="avatar"
                             *ngFor="let avatar of avatarList"
                             >
