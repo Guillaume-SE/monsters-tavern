@@ -25,7 +25,7 @@
                     Abonnements
                 </button>
             <ng-container *ngIf="showFollowing">
-                <div *ngFor="let following of followingList" (click)="goToMonsterProfil(following._id)">
+                <div *ngFor="let following of followingList" (click)="showMonsterProfil(following._id)">
                     <ul>
                         <li>
                             {{ following.name }}
@@ -43,11 +43,11 @@
                     Abonnés
                 </button>
                 <ng-container *ngIf="showFollower">
-                <div *ngFor="let follower of followerList" (click)="goToMonsterProfil(follower._id)">
+                <div *ngFor="let follower of followerList" (click)="showMonsterProfil(follower._id)">
                     <ul>
-                        <li>
+                        <!-- <li>
                             <img class="avatar" [src]="follower.avatar" alt="">
-                        </li>
+                        </li> -->
                         <li>
                             {{ follower.name }}
                         </li>

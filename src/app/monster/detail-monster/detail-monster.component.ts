@@ -15,7 +15,7 @@ import { IDecodedToken } from 'src/app/_interfaces/token';
 })
 export class DetailMonsterComponent implements OnInit {
 
-  monster: IMonster | undefined;
+  monster: IMonster;
   monsterProfilId: string | null;
   followingList: IMonsterProfil[] = [];
   followerList: IMonsterProfil[] = [];
@@ -47,12 +47,11 @@ export class DetailMonsterComponent implements OnInit {
         this.loggedMonsterId = decodeToken;
       }
     }
-
     if (this.monsterProfilId) {
-      this.monsterService.getMonsterById(this.monsterProfilId)
-        .subscribe((monster) => this.monster = monster);
+      this.showMonsterProfil(this.monsterProfilId);
     }
-    if(!this.monsterProfilId) {
+
+    if (!this.monsterProfilId) {
       this.router.navigate(['home/monsters']);
     }
 
@@ -72,17 +71,39 @@ export class DetailMonsterComponent implements OnInit {
   }
 
   isLogged() {
-    if(this.tokenService.isLogged()) {
+    if (this.tokenService.isLogged()) {
       return true;
     }
     return false;
   }
 
   onHisProfil() {
-    if(this.monsterProfilId === this.loggedMonsterId) {
+    if (this.monsterProfilId === this.loggedMonsterId) {
       return true;
     }
     return false;
+  }
+
+  showMonsterProfil(monsterId: string) {
+    this.monsterService.getMonsterById(monsterId)
+      .subscribe((monster) => {
+        this.monster = monster,
+          this.monsterProfilId = monster._id
+      })
+
+      if (this.isLogged()) {
+      this.followService.getMonsterFollowingList(monsterId)
+        .subscribe((followingList) => {
+          this.followingList = followingList,
+            this.followingCount = followingList.length;
+        });
+
+      this.followService.getMonsterFollowerList(monsterId)
+        .subscribe((followerList) => {
+          this.followerList = followerList,
+            this.followerCount = followerList.length;
+        });
+    }
   }
 
   showMonsterFollowing() {
@@ -90,10 +111,6 @@ export class DetailMonsterComponent implements OnInit {
   }
   showMonsterFollower() {
     this.showFollower = !this.showFollower;
-  }
-
-  goToMonsterProfil(monsterId: string) {
-    this.router.navigate(['monster/profil', monsterId]);
   }
 
   goToEditMonster() {
