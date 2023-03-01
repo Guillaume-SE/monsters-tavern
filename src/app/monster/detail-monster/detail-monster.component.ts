@@ -32,12 +32,10 @@ export class DetailMonsterComponent implements OnInit {
     private monsterService: MonsterService,
     private tokenService: TokenService,
     private followService: FollowService,
-    private authService: AuthService,
-    private activeRoute: ActivatedRoute
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-
     this.monsterProfilId = this.route.snapshot.paramMap.get('monsterId');
 
     if (this.isLogged()) {
@@ -53,20 +51,6 @@ export class DetailMonsterComponent implements OnInit {
 
     if (!this.monsterProfilId) {
       this.router.navigate(['home/monsters']);
-    }
-
-    if (this.monsterProfilId && this.isLogged()) {
-      this.followService.getMonsterFollowingList(this.monsterProfilId)
-        .subscribe((followingList) => {
-          this.followingList = followingList,
-            this.followingCount = followingList.length;
-        });
-
-      this.followService.getMonsterFollowerList(this.monsterProfilId)
-        .subscribe((followerList) => {
-          this.followerList = followerList,
-            this.followerCount = followerList.length;
-        });
     }
   }
 
@@ -91,7 +75,7 @@ export class DetailMonsterComponent implements OnInit {
           this.monsterProfilId = monster._id
       })
 
-      if (this.isLogged()) {
+    if (this.isLogged()) {
       this.followService.getMonsterFollowingList(monsterId)
         .subscribe((followingList) => {
           this.followingList = followingList,
@@ -113,6 +97,24 @@ export class DetailMonsterComponent implements OnInit {
     this.showFollower = !this.showFollower;
   }
 
+  followMonster(monsterId: string) {
+    this.followService.follow(monsterId)
+      .subscribe({
+        error: error => {
+          throw new Error(error);
+        }
+      })
+  }
+
+  unfollowMonster(monsterId: string) {
+    this.followService.unfollow(monsterId)
+      .subscribe({
+        error: error => {
+          throw new Error(error);
+        }
+      })
+  }
+
   goToEditMonster() {
     this.router.navigate(['monster/edit', this.loggedMonsterId]);
   }
@@ -123,5 +125,12 @@ export class DetailMonsterComponent implements OnInit {
 
   goToDeleteMonster() {
     this.router.navigate(['monster/delete', this.loggedMonsterId]);
+  }
+
+  isFollower() {
+    // monsterProfilId = lurl;
+    // this.loggedMonsterId = le connecté
+    // console.log(this.followerList, this.followingList)
+    console.log(this.followerList[0]._id)
   }
 }

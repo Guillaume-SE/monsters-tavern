@@ -16,11 +16,19 @@ export class FollowService {
     return of(errorValue);
   }
 
-  getMonsterFollowingList(monsterId: string | null): Observable<IMonsterProfil[]> {
+  getMonsterFollowingList(monsterId: string): Observable<IMonsterProfil[]> {
     return this.http.get<IMonsterProfil[]>(`${this.BASE_URL}following/${monsterId}`);
   }
 
-  getMonsterFollowerList(monsterId: string | null): Observable<IMonsterProfil[]> {
+  getMonsterFollowerList(monsterId: string): Observable<IMonsterProfil[]> {
     return this.http.get<IMonsterProfil[]>(`${this.BASE_URL}followers/${monsterId}`);
+  }
+
+  follow(monsterId: string) {
+    return this.http.post(`${this.BASE_URL}follow/${monsterId}`, {} );
+  }
+
+  unfollow(monsterId: string) {
+    return this.http.delete(`${this.BASE_URL}unfollow/${monsterId}`);
   }
 }

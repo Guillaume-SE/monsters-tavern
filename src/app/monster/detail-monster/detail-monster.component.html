@@ -1,22 +1,36 @@
 <div *ngIf="monster">
-    <h2>{{ monster.name }}</h2>
     <div>
-        <img class="avatar" [src]="monster.avatar" alt="">
-    </div>
-    <div>
-        <ul>
-            <li>
-                {{ monster.race}}
-            </li>
-            <li>
-                {{ monster.role }}
-            </li>
-        </ul>
-        <span>
-            Membre depuis {{ monster.created_at | date: "yyyy" }}
-        </span>
+        <div>
+            <div class="monster-profil_title">
+                <h2>{{ monster.name }}</h2>
+                <div *ngIf="isLogged() && !onHisProfil()">
+                    <button (click)="followMonster(monster._id)">
+                        Suivre
+                    </button>
+                    <button (click)="unfollowMonster(monster._id)">
+                        Ne plus suivre
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <img class="avatar" [src]="monster.avatar" alt="">
+
+            <ul>
+                <li>
+                    {{ monster.race}}
+                </li>
+                <li>
+                    {{ monster.role }}
+                </li>
+            </ul>
+            <span>
+                Membre depuis {{ monster.created_at | date: "yyyy" }}
+            </span>
+        </div>
 
         <div *ngIf="isLogged()">
+            <!-- abonnements -->
             <div>
                 <span>
                     {{ followingCount }}
@@ -24,17 +38,18 @@
                 <button (click)="showMonsterFollowing()">
                     Abonnements
                 </button>
-            <ng-container *ngIf="showFollowing">
-                <div *ngFor="let following of followingList" (click)="showMonsterProfil(following._id)">
-                    <ul>
-                        <li>
-                            {{ following.name }}
-                        </li>
-                    </ul>
-                </div>
-            </ng-container>
+                <ng-container *ngIf="showFollowing">
+                    <div *ngFor="let following of followingList" (click)="showMonsterProfil(following._id)">
+                        <ul>
+                            <li>
+                                {{ following.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </ng-container>
             </div>
 
+            <!-- abonnés -->
             <div>
                 <span>
                     {{ followerCount }}
@@ -43,22 +58,22 @@
                     Abonnés
                 </button>
                 <ng-container *ngIf="showFollower">
-                <div *ngFor="let follower of followerList" (click)="showMonsterProfil(follower._id)">
-                    <ul>
-                        <!-- <li>
+                    <div *ngFor="let follower of followerList" (click)="showMonsterProfil(follower._id)">
+                        <ul>
+                            <!-- <li>
                             <img class="avatar" [src]="follower.avatar" alt="">
                         </li> -->
-                        <li>
-                            {{ follower.name }}
-                        </li>
-                    </ul>
-                </div>
-            </ng-container>
+                            <li>
+                                {{ follower.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </ng-container>
             </div>
         </div>
         <div *ngIf="!isLogged()">
             <p>
-                Pour voir le profil complet
+                Pour voir le profil complet et suivre le monstre
                 <a [routerLink]="['/login']">
                     Connectez-vous
                 </a>
@@ -69,6 +84,7 @@
             </p>
         </div>
     </div>
+    <!-- gestion de compte -->
     <div *ngIf="onHisProfil()">
         <div>
             <button (click)="goToEditMonster()">

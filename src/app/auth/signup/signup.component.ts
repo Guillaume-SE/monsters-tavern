@@ -35,7 +35,18 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(this.isLogged()) {
+      this.router.navigate(['home/monsters']);
+    }
+
     this.avatarList = this.monsterService.getAvatarList();
+  }
+
+  isLogged() {
+    if (this.tokenService.isLogged()) {
+      return true;
+    }
+    return false;
   }
 
   selectThisAvatar(avatarName: string) {
@@ -69,7 +80,7 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/monster/profil', monsterId]);
         },
         error: error => {
-          console.log(error);
+          throw new Error(error);
         }
       })
   }
