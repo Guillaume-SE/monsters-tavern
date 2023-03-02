@@ -127,10 +127,16 @@ export class DetailMonsterComponent implements OnInit {
     this.router.navigate(['monster/delete', this.loggedMonsterId]);
   }
 
+  // le monstre connecté est un follower
   isFollower() {
-    // monsterProfilId = lurl;
-    // this.loggedMonsterId = le connecté
-    // console.log(this.followerList, this.followingList)
-    console.log(this.followerList[0]._id)
+    return this.followerList.find(
+      monster => monster._id === this.loggedMonsterId
+    ) ? true : false;
+  }
+  // le monstre connecté est suivi par
+  isFollowing() {
+    return this.followingList.find(
+      monster => monster._id === this.loggedMonsterId
+    ) ? true : false;
   }
 }

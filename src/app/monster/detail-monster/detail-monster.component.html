@@ -4,10 +4,19 @@
             <div class="monster-profil_title">
                 <h2>{{ monster.name }}</h2>
                 <div *ngIf="isLogged() && !onHisProfil()">
-                    <button (click)="followMonster(monster._id)">
-                        Suivre
-                    </button>
-                    <button (click)="unfollowMonster(monster._id)">
+                    <button *ngIf="!isFollower()"
+                            (click)="followMonster(monster._id)"
+                    >
+                        <span *ngIf="!isFollower() && !isFollowing()">
+                            Suivre
+                        </span>
+                        <span *ngIf="!isFollower() && isFollowing()">
+                            Suivre en retour
+                        </span>
+                    </button >
+                    <button *ngIf="isFollower()"
+                            (click)="unfollowMonster(monster._id)"
+                    >
                         Ne plus suivre
                     </button>
                 </div>
