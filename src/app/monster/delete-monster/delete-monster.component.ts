@@ -37,10 +37,7 @@ export class DeleteMonsterComponent implements OnInit {
   }
 
   isLogged() {
-    if(this.tokenService.isLogged()) {
-      return true;
-    }
-    return false;
+    return this.tokenService.isLogged() ? true : false;
   }
 
   onHisProfil() {

@@ -19,10 +19,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {}
 
   isLogged() {
-    if (this.tokenService.isLogged()) {
-      return true;
-    }
-    return false;
+    return this.tokenService.isLogged() ? true : false;
   }
 
   getMonsterLoggedId() {
