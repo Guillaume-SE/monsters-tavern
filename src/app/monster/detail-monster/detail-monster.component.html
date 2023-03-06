@@ -14,7 +14,7 @@
                             Suivre en retour
                         </span>
                     </button>
-                    <button *ngIf="!isFollower"
+                    <button *ngIf="isFollower"
                             (click)="unfollowMonster(monster._id)"
                     >
                         Ne plus suivre

@@ -17,8 +17,8 @@ export class DetailMonsterComponent implements OnInit {
 
   monster: IMonster;
   monsterProfilId: string | null;
-  followingList: IMonsterProfil[] = [];
-  followerList: IMonsterProfil[] = [];
+  followingList: IMonsterProfil[];
+  followerList: IMonsterProfil[];
   isFollower: boolean;
   isFollowing: boolean;
   followingCount: number;
@@ -48,11 +48,7 @@ export class DetailMonsterComponent implements OnInit {
       }
     }
     if (this.monsterProfilId) {
-      // console.log(this.isFollower, this.isFollowing);
       this.showMonsterProfil(this.monsterProfilId);
-      this.loggedMonsterIsAFollower(this.loggedMonsterId);
-      this.loggedMonsterIsFollowedBy(this.loggedMonsterId);
-      // console.log(this.isFollower, this.isFollowing);
     }
 
     if (!this.monsterProfilId) {
@@ -80,12 +76,14 @@ export class DetailMonsterComponent implements OnInit {
         .subscribe((followingList) => {
           this.followingList = followingList,
             this.followingCount = followingList.length;
+            this.isFollowing = followingList.some(monster => monster._id === this.loggedMonsterId);
         });
 
       this.followService.getMonsterFollowerList(monsterId)
         .subscribe((followerList) => {
           this.followerList = followerList,
             this.followerCount = followerList.length;
+            this.isFollower = followerList.some(monster => monster._id === this.loggedMonsterId);
         });
     }
   }
@@ -97,28 +95,32 @@ export class DetailMonsterComponent implements OnInit {
     this.showFollower = !this.showFollower;
   }
 
-  loggedMonsterIsAFollower(monsterId: string) {
-    // return this.followerList.find(
-    //   monster => monster._id === this.loggedMonsterId
-    // ) ? true : false;
-    const isFollower = this.followerList.find(monster => monster._id === monsterId);
-    // console.log(isFollower)
-    if(isFollower) {
-      this.isFollower = true;
-    }
-    this.isFollower = false;
-  }
+  // loggedMonsterIsAFollower(monsterId: string, followerList: Array<IMonsterProfil>) {
 
-  loggedMonsterIsFollowedBy(monsterId: string) {
-    // return this.followingList.find(
-    //   monster => monster._id === this.loggedMonsterId
-    // ) ? true : false;
-    const isFollowing = this.followingList.find(monster => monster._id === monsterId);
-    if(isFollowing) {
-      this.isFollowing = true;
-    }
-    this.isFollowing = false;
-  }
+  //   const isAFollower = followerList.some(monster => monster._id === monsterId);
+  //   if(isAFollower) {
+  //     console.log(this.isFollower)
+  //     this.isFollower = true;
+  //     console.log(this.isFollower)
+  //   }
+  //   else {
+  //     console.log("no")
+  //     this.isFollower = false;
+  //   }
+  // }
+
+  // loggedMonsterIsFollowedBy(monsterId: string, followingList: Array<IMonsterProfil>) {
+
+  //   const isAFollowing = followingList.some(monster => monster._id === monsterId);
+  //   if(isAFollowing) {
+  //     this.isFollowing = true;
+  //     // return true;
+  //   }
+  //   else {
+  //     this.isFollowing = false;
+  //   }
+  //   // return false;
+  // }
 
   followMonster(monsterId: string) {
     this.followService.follow(monsterId)
