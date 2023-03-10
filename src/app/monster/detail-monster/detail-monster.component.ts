@@ -95,33 +95,6 @@ export class DetailMonsterComponent implements OnInit {
     this.showFollower = !this.showFollower;
   }
 
-  // loggedMonsterIsAFollower(monsterId: string, followerList: Array<IMonsterProfil>) {
-
-  //   const isAFollower = followerList.some(monster => monster._id === monsterId);
-  //   if(isAFollower) {
-  //     console.log(this.isFollower)
-  //     this.isFollower = true;
-  //     console.log(this.isFollower)
-  //   }
-  //   else {
-  //     console.log("no")
-  //     this.isFollower = false;
-  //   }
-  // }
-
-  // loggedMonsterIsFollowedBy(monsterId: string, followingList: Array<IMonsterProfil>) {
-
-  //   const isAFollowing = followingList.some(monster => monster._id === monsterId);
-  //   if(isAFollowing) {
-  //     this.isFollowing = true;
-  //     // return true;
-  //   }
-  //   else {
-  //     this.isFollowing = false;
-  //   }
-  //   // return false;
-  // }
-
   followMonster(monsterId: string) {
     this.followService.follow(monsterId)
       .subscribe({
@@ -129,8 +102,7 @@ export class DetailMonsterComponent implements OnInit {
           throw new Error(error);
         }
       });
-
-    console.log("follow");
+      this.isFollower = true;
   }
 
   unfollowMonster(monsterId: string) {
@@ -140,7 +112,7 @@ export class DetailMonsterComponent implements OnInit {
           throw new Error(error);
         }
       });
-      console.log("unfollow")
+      this.isFollower = false;
   }
 
   goToEditMonster() {

@@ -16,6 +16,9 @@
                         <div [hidden]="name.valid || name.pristine">
                             Un nom est requis (1-35)
                         </div>
+                        <span>
+                            {{ nameError }}
+                        </span>
                     </div>
 
                     <!-- monster email -->
@@ -26,6 +29,9 @@
                         <div [hidden]="email.valid || email.pristine">
                             Vous devez indiquer une adresse mail valide
                         </div>
+                        <span>
+                            {{ emailError }}
+                        </span>
                     </div>
 
                     <!-- monster password -->

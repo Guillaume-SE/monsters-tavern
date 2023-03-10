@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: data => {
           this.tokenService.saveToken(data.token);
-          this.message = "Connexion réussie";
           this.location.back();
         },
         error: error => {

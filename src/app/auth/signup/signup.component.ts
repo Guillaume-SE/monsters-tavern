@@ -6,6 +6,7 @@ import { INewMonster } from 'src/app/_interfaces/monster';
 import { AuthService } from 'src/app/_services/auth.service';
 import { MonsterService } from 'src/app/_services/monster.service';
 import { TokenService } from 'src/app/_services/token.service';
+import { ApiErrorService } from 'src/app/_subjects/api-error.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +16,8 @@ import { TokenService } from 'src/app/_services/token.service';
 export class SignupComponent implements OnInit {
 
   message: string = "Inscrivez-vous";
+  nameError: string;
+  emailError: string;
   avatarList: Array<string> = [];
   form: INewMonster = {
     name: '',
@@ -31,7 +34,8 @@ export class SignupComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService,
     private monsterService: MonsterService,
-    private router: Router
+    private router: Router,
+    private apiErrorService: ApiErrorService
   ) { }
 
   ngOnInit() {
@@ -66,6 +70,8 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
+    this.nameError = '';
+    this.emailError = '';
     this.authService.signup({
       ...this.form,
       avatar: this.ensureValidityOfPath(this.form.avatar)
@@ -77,7 +83,14 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/monster/profil', monsterId]);
         },
         error: error => {
-          throw new Error(error);
+          const tag = error.error.tag;
+          const errorMessage = error.error.message;
+          if(tag === "name") {
+            this.nameError = errorMessage;
+          }
+          if(tag === "email") {
+            this.emailError = errorMessage;
+          }
         }
       })
   }

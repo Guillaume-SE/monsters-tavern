@@ -4,8 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MonsterService } from '../../_services/monster.service';
 import { TokenService } from 'src/app/_services/token.service';
 
-import { IMonster, IMonsterProfil, INewMonster } from 'src/app/_interfaces/monster';
+import { IMonster } from 'src/app/_interfaces/monster';
 import { IDecodedToken } from 'src/app/_interfaces/token';
+import { ApiErrorService } from 'src/app/_subjects/api-error.service';
 
 @Component({
   selector: 'app-edit-monster',
@@ -29,12 +30,15 @@ export class EditMonsterComponent implements OnInit {
   loggedMonsterId: IDecodedToken['id'];
   BASE_PATH: string = "./assets/avatar/";
   PATH_EXT: string = ".svg";
+  nameError: string;
+  emailError: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private monsterService: MonsterService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private apiErrorService: ApiErrorService
   ) { }
 
   ngOnInit() {
@@ -79,23 +83,38 @@ export class EditMonsterComponent implements OnInit {
 
     const isValid = allValidPaths.includes(path);
 
-    if(isValid) {
+    if (isValid) {
       return path;
     }
 
     return allValidPaths[Math.floor(Math.random() * allValidPaths.length)];
   }
 
+  createErrorMessage(tag: string) {
+    if(tag === "name") {
+      this.nameError = "Ce nom est déjà utilisé";
+    }
+    if(tag === "email") {
+      this.emailError = "Cet email est déjà utilisé";
+    }
+  }
+
   onSubmit() {
+    this.nameError = "";
+    this.emailError = "";
+    this.apiErrorService.apiError.subscribe(data => {
+      this.createErrorMessage(data);
+    });
 
     this.monsterService.updateMonster({
-        ...this.form,
-        avatar: this.ensureValidityOfPath(this.form.avatar)
-      })
-      .subscribe((monster) => {
+      ...this.form,
+      avatar: this.ensureValidityOfPath(this.form.avatar)
+    }).subscribe({
+      next: monster => {
         if (monster) {
           this.router.navigate(['/monster/profil/', this.form._id])
         }
-      });
+      }
+    })
   }
 }
