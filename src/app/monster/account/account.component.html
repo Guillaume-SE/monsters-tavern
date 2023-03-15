@@ -3,23 +3,6 @@
         <div>
             <div class="monster-profil_title">
                 <h2>{{ monster.name }}</h2>
-                <div *ngIf="isLogged() && !onHisProfil()">
-                    <button *ngIf="!isFollower"
-                            (click)="followMonster(monster._id)"
-                    >
-                        <span *ngIf="!isFollower && !isFollowing">
-                            Suivre
-                        </span>
-                        <span *ngIf="!isFollower && isFollowing">
-                            Suivre en retour
-                        </span>
-                    </button>
-                    <button *ngIf="isFollower"
-                            (click)="unfollowMonster(monster._id)"
-                    >
-                        Ne plus suivre
-                    </button>
-                </div>
             </div>
         </div>
         <div>
@@ -38,7 +21,7 @@
             </span>
         </div>
 
-        <div *ngIf="isLogged()">
+        <div>
             <!-- abonnements -->
             <div>
                 <span>
@@ -48,7 +31,7 @@
                     Abonnements
                 </button>
                 <ng-container *ngIf="showFollowing">
-                    <div *ngFor="let following of followingList" (click)="showMonsterProfil(following._id)">
+                    <div *ngFor="let following of followingList" (click)="goToMonsterProfil(following._id)">
                         <ul>
                             <li>
                                 {{ following.name }}
@@ -67,7 +50,7 @@
                     Abonnés
                 </button>
                 <ng-container *ngIf="showFollower">
-                    <div *ngFor="let follower of followerList" (click)="showMonsterProfil(follower._id)">
+                    <div *ngFor="let follower of followerList" (click)="goToMonsterProfil(follower._id)">
                         <ul>
                             <!-- <li>
                             <img class="avatar" [src]="follower.avatar" alt="">
@@ -80,21 +63,9 @@
                 </ng-container>
             </div>
         </div>
-        <div *ngIf="!isLogged()">
-            <p>
-                Pour voir le profil complet et suivre le monstre
-                <a [routerLink]="['/login']">
-                    Connectez-vous
-                </a>
-                ou
-                <a [routerLink]="['/signup']">
-                    Créer un compte
-                </a>
-            </p>
-        </div>
     </div>
     <!-- gestion de compte -->
-    <!-- <div *ngIf="onHisProfil()">
+    <div>
         <div>
             <button (click)="goToEditMonster()">
                 Modifier
@@ -110,7 +81,7 @@
                 Supprimer mon compte
             </button>
         </div>
-    </div> -->
+    </div>
 </div>
 
 <div *ngIf='!monster'>

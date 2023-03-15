@@ -13,6 +13,7 @@ import { DeleteMonsterComponent } from './delete-monster/delete-monster.componen
 
 import { MonsterService } from '../_services/monster.service';
 import { FollowService } from '../_services/follow.service';
+import { AccountComponent } from './account/account.component';
 
 const monsterRoutes: Routes = [
   {
@@ -30,6 +31,11 @@ const monsterRoutes: Routes = [
     component: ListMonstersComponent
   },
   {
+    path: 'monster/myaccount',
+    component: AccountComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'monster/profil/:monsterId',
     component: DetailMonsterComponent
   }
@@ -41,7 +47,8 @@ const monsterRoutes: Routes = [
     DetailMonsterComponent,
     EditMonsterComponent,
     DeleteMonsterComponent,
-    LoaderComponent
+    LoaderComponent,
+    AccountComponent
   ],
   imports: [
     CommonModule,

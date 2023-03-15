@@ -29,6 +29,10 @@ export class SignupComponent implements OnInit {
   }
   BASE_PATH: string = "./assets/avatar/";
   PATH_EXT: string = ".svg";
+  changetype: boolean = true;
+  passwordVisible: boolean = true;
+  iconShow: string = "./assets/general-icon/show-icon.svg";
+  iconHide: string = "./assets/general-icon/hide-icon.svg";
 
   constructor(
     private authService: AuthService,
@@ -48,6 +52,11 @@ export class SignupComponent implements OnInit {
 
   isLogged() {
     return this.tokenService.isLogged() ? true : false;
+  }
+
+  viewPassword(): void {
+    this.passwordVisible = !this.passwordVisible;
+    this.changetype = !this.changetype;
   }
 
   selectThisAvatar(avatarName: string) {

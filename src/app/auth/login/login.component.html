@@ -15,7 +15,19 @@
         </div>
         <div>
             <label for="password">Password</label>
-            <input type="password" id="password" [(ngModel)]="form.password" #password="ngModel" name="password" required>
+            <input [type]="changetype? 'password' : 'text'"
+                    id="password"
+                    [(ngModel)]="form.password"
+                    #password="ngModel"
+                    name="password"
+                    required
+                >
+            <div (click)="viewPassword()">
+                <img class="visibility-password_icon"
+                    [src]="passwordVisible ? iconShow : iconHide"
+                    [title]="passwordVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe'"
+                    [alt]="passwordVisible ? 'afficher' : 'masquer'">
+            </div>
             <span *ngIf="password.errors && loginForm.submitted">
                 Mot de passe est requis
             </span>

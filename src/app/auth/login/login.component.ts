@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
+  changetype: boolean = true;
+  passwordVisible: boolean = true;
+  iconShow: string = "./assets/general-icon/show-icon.svg";
+  iconHide: string = "./assets/general-icon/hide-icon.svg";
 
   constructor(
     private authService: AuthService,
@@ -26,6 +30,11 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(){ }
+
+  viewPassword(): void {
+    this.passwordVisible = !this.passwordVisible;
+    this.changetype = !this.changetype;
+  }
 
   onSubmit() {
     this.message = "Tentative de connexion...";

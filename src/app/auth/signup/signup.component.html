@@ -37,9 +37,19 @@
                     <!-- monster password -->
                     <div>
                         <label for="password">Mot de passe</label>
-                        <input type="password" id="password" required [(ngModel)]="form.password" name="password"
-                            #password="ngModel">
-
+                        <input [type]="changetype? 'password' : 'text'"
+                                id="password"
+                                required
+                                [(ngModel)]="form.password"
+                                name="password"
+                                #password="ngModel"
+                            >
+                        <div (click)="viewPassword()">
+                            <img class="visibility-password_icon"
+                                [src]="passwordVisible ? iconShow : iconHide"
+                                [title]="passwordVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe'"
+                                [alt]="passwordVisible ? 'afficher' : 'masquer'">
+                        </div>
                         <div [hidden]="password.valid || password.pristine">
                             Un mot de passe est requis
                         </div>

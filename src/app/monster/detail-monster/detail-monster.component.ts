@@ -38,6 +38,7 @@ export class DetailMonsterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.monsterProfilId = this.route.snapshot.paramMap.get('monsterId');
 
     if (this.isLogged()) {
@@ -68,7 +69,10 @@ export class DetailMonsterComponent implements OnInit {
     this.monsterService.getMonsterById(monsterId)
       .subscribe((monster) => {
         this.monster = monster,
-          this.monsterProfilId = monster._id
+          this.monsterProfilId = monster._id;
+          if( this.onHisProfil()) {
+            this.router.navigate(['monster/myaccount']);
+          }
       })
 
     if (this.isLogged()) {

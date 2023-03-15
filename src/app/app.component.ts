@@ -29,4 +29,8 @@ export class AppComponent implements OnInit {
       return decodeToken;
     } return undefined;
   }
+
+  reload() {
+    // window.location.reload();
+  }
 }
