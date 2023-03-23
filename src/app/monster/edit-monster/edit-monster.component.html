@@ -1,156 +1,170 @@
-<h2>Modifier votre profil</h2>
+<section class="form">
+    <p class="form_message">
+        Modification de votre profil
+    </p>
 
-<div *ngIf="onHisProfil()">
-    <div *ngIf="form">
-        <img class="avatar" [src]="form.avatar" alt="">
+    <div *ngIf="onHisProfil()">
+        <div *ngIf="form">
+            <img class="avatar-big" [src]="form.avatar" alt="">
 
-    <form (ngSubmit)="onSubmit()" #monsterForm="ngForm">
-    <div>
-        <div>
-            <div>
-
-                <!-- monster name -->
+            <form (ngSubmit)="onSubmit()" #monsterForm="ngForm">
                 <div>
-                    <label for="name">Nom</label>
-                    <input type="text"
-                            id="name"
-                            [(ngModel)]="form.name"
-                            name="name"
-                            #name="ngModel"
-                            required
-                            autocomplete="off"
-                        >
-                    <span [hidden]="name.valid || name.pristine">
-                        Un nom est requis (1-35)
-                    </span>
-                    <span>
-                        {{ nameError }}
-                    </span>
-                </div>
 
-                <!-- monster email -->
-                <div>
-                    <label for="email">Email</label>
-                    <input type="text" id="email"
-                            [(ngModel)]="form.email"
-                            email="true"
-                            name="email"
-                            #email="ngModel"
-                            required
-                        >
-                    <span [hidden]="email.valid || email.pristine">
-                        Vous devez indiquer une adresse mail valide
-                    </span>
-                    <span>
-                        {{ emailError }}
-                    </span>
-                </div>
-
-                <!-- monster race -->
-                <div>
-                    <label for="race">Indiquez votre race</label>
-                    <select name="race"
-                            id="race-select"
-                            [(ngModel)]="form.race"
-                            required
-                        >
-                        <option value="" disabled>
-                            --Choisissez une option--
-                        </option>
-                        <option value="Démon">
-                            Démon
-                        </option>
-                        <option value="Lycanthrope">
-                            Lycanthrope
-                        </option>
-                        <option value="Vampire">
-                            Vampire
-                        </option>
-                        <option value="Orc">
-                            Orc
-                        </option>
-                        <option value="Gobelin">
-                            Gobelin
-                        </option>
-                        <option value="Elfe">
-                            Elfe
-                        </option>
-                        <option value="Dragon">
-                            Dragon
-                        </option>
-                        <option value="Harpie">
-                            Harpie
-                        </option>
-                        <option value="Goule">
-                            Goule
-                        </option>
-                    </select>
-                </div>
-
-                <!-- monster role -->
-                <div>
-                    <label for="role">Indiquez votre role</label>
-                    <select name="role"
-                            id="role-select"
-                            [(ngModel)]="form.role"
-                            required
-                        >
-                        <option value="" disabled>
-                            --Choisissez une option--
-                        </option>
-                        <option value="Alchimiste">
-                            Alchimiste
-                        </option>
-                        <option value="Archer">
-                            Archer
-                        </option>
-                        <option value="Assassin">
-                            Assassin
-                        </option>
-                        <option value="Espion">
-                            Espion
-                        </option>
-                        <option value="Guerrier">
-                            Guerrier
-                        </option>
-                        <option value="Nécromancien">
-                            Nécromancien
-                        </option>
-                        <option value="Soigneur">
-                            Soigneur
-                        </option>
-                        <option value="Sorcier">
-                            Sorcier
-                        </option>
-                    </select>
-                </div>
-
-                <!-- monster avatar  -->
-                <div class="select-avatar">
-                    <p class="select-avatar_text">
-                        Choisissez votre avatar
-                    </p>
-                    <div class="select-avatar_avatar-box"
-                        name="avatar"
-                        (click)="selectThisAvatar(avatar)"
-                        [attr.data-avatar]="avatar"
-                        *ngFor="let avatar of avatarList"
-                    >
-                        <img class="avatar" src="./assets/avatar/{{avatar}}.svg" alt="">
+                    <!-- monster name -->
+                    <div>
+                        <label for="name" class="form_input-descr">
+                            Nom
+                        </label>
+                        <input class="form_input"
+                                type="text"
+                                id="name"
+                                [(ngModel)]="form.name"
+                                name="name"
+                                #name="ngModel"
+                                required
+                                autocomplete="off">
+                        <span [hidden]="name.valid || name.pristine">
+                            Un nom est requis (1-35)
+                        </span>
+                        <span>
+                            {{ nameError }}
+                        </span>
                     </div>
-                </div>
 
-                <!-- Submit button -->
-                <div>
-                    <button type="submit" [disabled]="!monsterForm.form.valid">
-                        Valider
-                    </button>
-                </div>
+                    <!-- monster email -->
+                    <div>
+                        <label for="email" class="form_input-descr">
+                            Adresse email
+                        </label>
+                        <input class="form_input"
+                                type="text"
+                                id="email"
+                                [(ngModel)]="form.email"
+                                email="true"
+                                name="email"
+                                #email="ngModel"
+                                required>
+                        <span [hidden]="email.valid || email.pristine">
+                            Vous devez indiquer une adresse mail valide
+                        </span>
+                        <span>
+                            {{ emailError }}
+                        </span>
+                    </div>
 
-            </div>
+                    <!-- monster race -->
+                    <div>
+                        <label for="race" class="form_input-descr">
+                            Indiquez votre race
+                        </label>
+                        <select class="form_select"
+                                name="race"
+                                id="race-select"
+                                [(ngModel)]="form.race"
+                                required
+                            >
+                            <option value="" disabled>
+                                --Choisissez une option--
+                            </option>
+                            <option value="Démon">
+                                Démon
+                            </option>
+                            <option value="Lycanthrope">
+                                Lycanthrope
+                            </option>
+                            <option value="Vampire">
+                                Vampire
+                            </option>
+                            <option value="Orc">
+                                Orc
+                            </option>
+                            <option value="Gobelin">
+                                Gobelin
+                            </option>
+                            <option value="Elfe">
+                                Elfe
+                            </option>
+                            <option value="Dragon">
+                                Dragon
+                            </option>
+                            <option value="Harpie">
+                                Harpie
+                            </option>
+                            <option value="Goule">
+                                Goule
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- monster role -->
+                    <div>
+                        <label for="role" class="form_input-descr">
+                            Indiquez votre role
+                        </label>
+                        <select class="form_select"
+                                name="role"
+                                id="role-select"
+                                [(ngModel)]="form.role"
+                                required
+                            >
+                            <option value="" disabled>
+                                --Choisissez une option--
+                            </option>
+                            <option value="Alchimiste">
+                                Alchimiste
+                            </option>
+                            <option value="Archer">
+                                Archer
+                            </option>
+                            <option value="Assassin">
+                                Assassin
+                            </option>
+                            <option value="Espion">
+                                Espion
+                            </option>
+                            <option value="Guerrier">
+                                Guerrier
+                            </option>
+                            <option value="Nécromancien">
+                                Nécromancien
+                            </option>
+                            <option value="Soigneur">
+                                Soigneur
+                            </option>
+                            <option value="Sorcier">
+                                Sorcier
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- monster avatar  -->
+                    <div class="select-avatar">
+                        <p class="select-avatar_text">
+                            Un nouvel avatar ?
+                        </p>
+                        <div class="select-avatar_box"
+                            name="avatar"
+                            (click)="selectThisAvatar(avatar)"
+                            [attr.data-avatar]="avatar"
+                            *ngFor="let avatar of avatarList"
+                        >
+                            <img class="avatar" src="./assets/avatar/{{avatar}}.svg" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <div>
+                        <button class="btn btn-green" type="submit" [disabled]="!monsterForm.form.valid">
+                            Valider
+                        </button>
+                    </div>
+
+                </div>
+            </form>
         </div>
     </div>
-</form>
-</div>
-</div>
-<h3 *ngIf="!form">Aucun monstre à éditer...</h3>
+</section>
+
+<span *ngIf="!form">
+    <app-loader></app-loader>
+</span>

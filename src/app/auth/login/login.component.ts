@@ -14,6 +14,7 @@ import { TokenService } from '../../_services/token.service';
 export class LoginComponent implements OnInit {
 
   message: string = "Connectez-vous";
+  errorMessage: string;
   form: ICredential = {
     email: '',
     password: ''
@@ -45,7 +46,8 @@ export class LoginComponent implements OnInit {
           this.location.back();
         },
         error: error => {
-          this.message = "Adresse email ou mot de passe incorrect"
+          this.message = "Connectez-vous"
+          this.errorMessage = "Adresse email ou mot de passe incorrect"
         }
       })
   }

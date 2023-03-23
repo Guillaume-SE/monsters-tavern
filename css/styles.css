@@ -1,0 +1,302 @@
+html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+button, input, select {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+img, video {
+  height: auto;
+  max-width: 100%;
+}
+
+iframe {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td, th {
+  padding: 0;
+}
+
+.btn {
+  display: block;
+  margin: 1em auto;
+  padding: 1em;
+  font-weight: bold;
+  color: black;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.signupform-password_icon, .loginform-password_icon {
+  position: absolute;
+  top: 35px;
+  right: 5px;
+  width: 30px;
+}
+
+.signupform, .loginform {
+  width: 40%;
+  min-height: 300px;
+  margin: 5em auto;
+  padding: 1em;
+  text-align: center;
+}
+
+.signupform_input, .loginform_input {
+  width: 100%;
+  height: 2.5em;
+  margin: 1em auto;
+  padding: 1em;
+  border: solid 1px #4CBA9D;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+}
+
+.error-message {
+  margin: 6px 0;
+  color: red;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.header_nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 8px;
+  box-shadow: 0 1px 3px rgba(76, 186, 157, 0.5), 0 1px 2px rgba(76, 186, 157, 0.5);
+}
+
+.header_logo-img {
+  width: 4em;
+  height: auto;
+}
+
+.header_title {
+  font-weight: bold;
+  font-size: 1em;
+  color: #F07E61;
+}
+
+.header_nav-list {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+}
+
+.header_nav-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: #000000;
+}
+
+.header_nav-link:hover {
+  color: #F07E61;
+}
+
+.loginform_message {
+  margin-bottom: 1em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.loginform_input-descr {
+  display: block;
+  text-align: start;
+}
+
+.loginform_password {
+  position: relative;
+}
+
+.loginform_btn {
+  background-color: #4CBA9D;
+}
+
+.loginform_link {
+  color: #4CBA9D;
+  font-weight: bold;
+}
+
+.signup_message {
+  margin-bottom: 1em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.signupform_input-descr {
+  display: block;
+  text-align: start;
+}
+
+.signupform_select {
+  width: 100%;
+  height: 3.5em;
+  margin: 1em auto;
+  padding: 1em;
+  border: solid 1px #4CBA9D;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.signupform-password {
+  position: relative;
+}
+
+.signupform_link {
+  color: #F07E61;
+  font-weight: bold;
+}
+
+.signupform_btn {
+  background-color: #F07E61;
+}
+
+.homepage {
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  margin: auto;
+}
+
+.homepage_card {
+  width: 250px;
+  margin: 8px;
+  padding: 16px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(76, 186, 157, 0.5), 0 1px 2px rgba(76, 186, 157, 0.5);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.homepage_card:hover {
+  box-shadow: 0 14px 28px rgba(76, 186, 157, 0.25), 0 10px 10px rgba(76, 186, 157, 0.25);
+}
+
+.homepage_card_identity {
+  text-align: center;
+  font-weight: 700;
+}
+
+.homepage_card_infos {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8px;
+}
+
+.monster-profil {
+  width: 85%;
+  margin: 32px auto;
+}
+
+.monster-profil_identity {
+  display: flex;
+  justify-content: space-between;
+}
+
+.monster-profil_name {
+  font-weight: 700;
+}
+
+.monster-profil_infos {
+  text-align: center;
+}
+
+.monster-profil_avatar {
+  width: 100px;
+}
+
+.monster-profil_follow {
+  display: flex;
+  justify-content: space-around;
+}
+
+.monster-profil_following {
+  width: 40%;
+}
+
+.monster-profil_follower {
+  width: 40%;
+  text-align: end;
+}
+
+.monster-profil_following-btn,
+.monster-profil_follower-btn {
+  margin: 1em auto;
+  padding: 1em;
+  font-weight: bold;
+  color: black;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.monster-profil_follow-btn {
+  background-color: #4CBA9D;
+}
+
+.monster-profil_unfollow-btn {
+  background-color: #F07E61;
+}
+
+.select-avatar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+}
+
+.select-avatar_text {
+  width: 100%;
+  text-align: center;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+}
+
+.select-avatar_avatar-box {
+  width: 24%;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.select-avatar_avatar-box:hover {
+  box-shadow: 0 14px 28px rgba(76, 186, 157, 0.25), 0 10px 10px rgba(76, 186, 157, 0.25);
+  border-radius: 5px;
+}/*# sourceMappingURL=styles.css.map */

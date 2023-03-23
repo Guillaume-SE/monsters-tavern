@@ -1,44 +1,312 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import "sass/_reset.scss";
+@import "sass/_variables.scss";
+@import "sass/_placeholders.scss";
+@import "sass/_mixins.scss";
+
+
+body {
+    font-family: $main-font-family;
+    font-size: $base-font-size;
 }
 
-.monster-card {
-    border: solid 2px purple;
-    margin: 8px;
-    padding: 8px;
+// * GENERIC STYLE *
+.error-message {
+    margin: 6px 0;
+    color: red;
 }
-.monster-profil_title {
+
+.btn {
+    @extend %btn;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-green {
+    background-color: $primary;
+}
+
+.btn-green:hover {
+    box-shadow: $primary-shadow-hover;
+}
+
+.btn-orange {
+    background-color: $secondary;
+    border: $border-orange;
+    border-radius: $default-radius;
+}
+
+.btn-orange:hover {
+    box-shadow: $secondary-shadow-hover;
+}
+
+.avatar-big {
+    width: 110px;
+}
+
+.avatar {
+    width: 60px;
+}
+
+.avatar-small {
+    width: 30px;
+}
+
+// * HEADER & NAVBAR *
+.header_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 8px;
+    box-shadow: $primary-shadow-static;
+}
+
+.header_logo-img {
+    width: 4em;
+    height: auto;
+}
+
+.header_title {
+    font-weight: bold;
+    font-size: $h1-font-size;
+    color: $secondary;
+}
+
+.header_nav-list {
     display: flex;
     justify-content: space-around;
+    width: 70%;
 }
+
+.header_nav-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: $dark;
+}
+
+.header_nav-link:hover {
+    color: $secondary;
+}
+
+// * FORM *
+
+.form {
+    @extend %form-style;
+}
+
+.form_message {
+    margin-bottom: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form_input-descr {
+    display: block;
+    text-align: start;
+}
+
+.form_input {
+    @extend %form-input;
+}
+
+.form_password {
+    position: relative;
+}
+
+.form_password-icon {
+    @extend %position-icon-password;
+}
+
+.form_select {
+    width: 100%;
+    height: 3.5em;
+    margin: 1em auto;
+    padding: 1em;
+    border: solid 1px $primary;
+    border-radius: $default-radius;
+    font-weight: bold;
+}
+
+// * LOGIN *
+
+.loginform_link {
+    color: $primary;
+    font-weight: bold;
+}
+
+// * SIGNUP *
+
+.signupform_link {
+    color: $secondary;
+    font-weight: bold;
+}
+
+// * DELETE ACCOUNT *
+.form-delete_choices {
+    display: flex;
+    width: 50%;
+    margin: auto;
+}
+
+//* HOMEPAGE *
+.homepage {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+    margin: auto;
+}
+
+.homepage_card {
+    width: 250px;
+    margin: 8px;
+    padding: 16px;
+    border-radius: $default-radius;
+    overflow: hidden;
+    box-shadow: $primary-shadow-static;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.homepage_card:hover {
+    box-shadow: $primary-shadow-hover;
+}
+
+.homepage_card_identity {
+    text-align: center;
+    font-weight: 700;
+}
+
+.homepage_card_infos {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 8px;
+}
+
+// * MONSTER PROFIL DETAIL  *
+.monster-profil {
+    width: 85%;
+    margin: 32px auto;
+}
+
+.monster-profil_identity {
+    display: flex;
+    justify-content: space-between;
+}
+
+.monster-profil_name {
+    width: 50%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.monster-profil_infos {
+    text-align: center;
+}
+
+.monster-profil_follow {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.monster-profil_following,
+.monster-profil_follower {
+    width: 30%;
+}
+
+.monster-profil_follow-list {
+    display: flex;
+    margin: 8px auto;
+    font-size: 14px;
+    border-radius: $default-radius;
+    align-items: center;
+    box-shadow: $primary-shadow-static;
+    cursor: pointer;
+}
+
+.monster-profil_follow-list:hover {
+    box-shadow: $primary-shadow-hover;
+}
+
+.monster-profil_text {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.monster-profil_link-login {
+    color: $primary;
+}
+
+.monster-profil_link-signup {
+    color: $secondary;
+}
+
+// profil utilisateur
+.monster-profil_options {
+    width: 40%;
+    margin: auto;
+}
+
+.monster-profil_options-list {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+.monster-profil_options-btn {
+    min-width: 90px;
+    width: 155px;
+    margin: 6px auto;
+    padding: 6px 0;
+    font-weight: bold;
+    cursor: pointer;
+    border: solid 1px black;
+}
+
+//selection avatar
 .select-avatar {
     display: flex;
     flex-wrap: wrap;
     width: 80%;
     margin: auto;
 }
+
 .select-avatar_text {
     width: 100%;
     text-align: center;
 }
-.avatar {
-    width: 60px;
-    height: 60px;
-}
-.select-avatar_avatar-box {
+
+.select-avatar_box {
     width: 24%;
     text-align: center;
     border: 2px solid transparent;
 }
-.select-avatar_avatar-box:hover {
-    border: 2px solid purple;
+
+.select-avatar_box:hover {
+    box-shadow: $primary-shadow-hover;
     border-radius: 5px;
 }
 
-// form
+// * PAGE NOT FOUND *
 
-.visibility-password_icon {
-    width: 25px;
+.pagenotfound {
+    text-align: center;
+}
+.pagenotfound_title {
+    margin: 24px auto;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: $secondary;
+}
+.pagenotfound_img {
+    margin: 26px auto;
+    width: 300px;
+}
+.pagenotfound_link {
+    font-weight: bold;
+    color: $secondary;
 }

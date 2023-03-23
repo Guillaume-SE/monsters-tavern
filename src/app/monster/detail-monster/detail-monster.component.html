@@ -1,55 +1,62 @@
-<div *ngIf="monster">
-    <div>
-        <div>
-            <div class="monster-profil_title">
-                <h2>{{ monster.name }}</h2>
-                <div *ngIf="isLogged() && !onHisProfil()">
-                    <button *ngIf="!isFollower"
-                            (click)="followMonster(monster._id)"
-                    >
-                        <span *ngIf="!isFollower && !isFollowing">
-                            Suivre
+<section class="monster-profil" *ngIf="monster">
+    <div class="monster-profil_identity">
+        <p class="monster-profil_name">
+            {{ monster.name }}
+        </p>
+        <div class="monster-profil_options"
+            *ngIf="isLogged() && !onHisProfil()">
+            <button *ngIf="!isFollower"
+                    class="btn btn-green"
+                    (click)="followMonster(monster._id)">
+                <span *ngIf="!isFollower && !isFollowing">
+                    Suivre
+                </span>
+                <span *ngIf="!isFollower && isFollowing">
+                    Suivre en retour
+                </span>
+            </button>
+            <button *ngIf="isFollower"
+                    class="btn btn-orange"
+                    (click)="unfollowMonster(monster._id)">
+                Ne plus suivre
+            </button>
+        </div>
+    </div>
+
+    <div class="monster-profil_infos">
+        <img class="avatar-big" [src]="monster.avatar" alt="">
+        <ul>
+            <li>
+                {{ monster.race}}
+            </li>
+            <li>
+                {{ monster.role }}
+            </li>
+        </ul>
+        <span>
+            Membre depuis {{ monster.created_at | date: "yyyy" }}
+        </span>
+    </div>
+
+    <!-- Abonnements et Abonnés -->
+    <ng-container *ngIf="isLogged()">
+        <div class="monster-profil_follow">
+            <div class="monster-profil_following">
+                <div>
+                    <button class="btn"
+                            (click)="showMonsterFollowing()">
+                        <span>
+                            Abonnements ({{ followingCount }})
                         </span>
-                        <span *ngIf="!isFollower && isFollowing">
-                            Suivre en retour
-                        </span>
-                    </button>
-                    <button *ngIf="isFollower"
-                            (click)="unfollowMonster(monster._id)"
-                    >
-                        Ne plus suivre
                     </button>
                 </div>
-            </div>
-        </div>
-        <div>
-            <img class="avatar" [src]="monster.avatar" alt="">
-
-            <ul>
-                <li>
-                    {{ monster.race}}
-                </li>
-                <li>
-                    {{ monster.role }}
-                </li>
-            </ul>
-            <span>
-                Membre depuis {{ monster.created_at | date: "yyyy" }}
-            </span>
-        </div>
-
-        <div *ngIf="isLogged()">
-            <!-- abonnements -->
-            <div>
-                <span>
-                    {{ followingCount }}
-                </span>
-                <button (click)="showMonsterFollowing()">
-                    Abonnements
-                </button>
                 <ng-container *ngIf="showFollowing">
-                    <div *ngFor="let following of followingList" (click)="showMonsterProfil(following._id)">
-                        <ul>
+                    <div *ngFor="let following of followingList"
+                        (click)="showMonsterProfil(following._id)">
+                        <ul class="monster-profil_follow-list">
+                            <li>
+                                <img class="avatar-small" [src]="following.avatar" alt="">
+                            </li>
                             <li>
                                 {{ following.name }}
                             </li>
@@ -58,20 +65,21 @@
                 </ng-container>
             </div>
 
-            <!-- abonnés -->
-            <div>
-                <span>
-                    {{ followerCount }}
-                </span>
-                <button (click)="showMonsterFollower()">
-                    Abonnés
-                </button>
+            <div class="monster-profil_follower">
+                <div>
+                    <button class="btn" (click)="showMonsterFollower()">
+                        <span>
+                            Abonnés ({{ followerCount }})
+                        </span>
+                    </button>
+                </div>
                 <ng-container *ngIf="showFollower">
-                    <div *ngFor="let follower of followerList" (click)="showMonsterProfil(follower._id)">
-                        <ul>
-                            <!-- <li>
-                            <img class="avatar" [src]="follower.avatar" alt="">
-                        </li> -->
+                    <div *ngFor="let follower of followerList"
+                        (click)="showMonsterProfil(follower._id)">
+                        <ul class="monster-profil_follow-list">
+                            <li>
+                                <img class="avatar-small" [src]="follower.avatar" alt="">
+                            </li>
                             <li>
                                 {{ follower.name }}
                             </li>
@@ -80,38 +88,21 @@
                 </ng-container>
             </div>
         </div>
-        <div *ngIf="!isLogged()">
-            <p>
-                Pour voir le profil complet et suivre le monstre
-                <a [routerLink]="['/login']">
-                    Connectez-vous
-                </a>
-                ou
-                <a [routerLink]="['/signup']">
-                    Créer un compte
-                </a>
-            </p>
-        </div>
+    </ng-container>
+
+    <div *ngIf="!isLogged()">
+        <p class="monster-profil_text">
+            Pour voir le profil complet et suivre le monstre
+            <a class="monster-profil_link-login" [routerLink]="['/login']">
+                Connectez-vous
+            </a>
+            ou
+            <a class="monster-profil_link-signup" [routerLink]="['/signup']">
+                Créer un compte
+            </a>
+        </p>
     </div>
-    <!-- gestion de compte -->
-    <!-- <div *ngIf="onHisProfil()">
-        <div>
-            <button (click)="goToEditMonster()">
-                Modifier
-            </button>
-        </div>
-        <div>
-            <button (click)="logout()">
-                Deconnexion
-            </button>
-        </div>
-        <div>
-            <button (click)="goToDeleteMonster()">
-                Supprimer mon compte
-            </button>
-        </div>
-    </div> -->
-</div>
+</section>
 
 <div *ngIf='!monster'>
     <app-loader></app-loader>

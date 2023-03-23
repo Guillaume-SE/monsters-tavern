@@ -27,6 +27,7 @@ export class AccountComponent implements OnInit {
   followerCount: number;
   showFollowing: boolean = false;
   showFollower: boolean = false;
+  showOptions: boolean = false;
 
   constructor(
     private router: Router,
@@ -94,5 +95,8 @@ export class AccountComponent implements OnInit {
     }
     showMonsterFollower() {
       this.showFollower = !this.showFollower;
+    }
+    showAccountOptions() {
+      this.showOptions = !this.showOptions;
     }
 }

@@ -15,7 +15,7 @@ import { ApiErrorService } from 'src/app/_subjects/api-error.service';
 })
 export class SignupComponent implements OnInit {
 
-  message: string = "Inscrivez-vous";
+  message: string = "Rejoignez la meute";
   nameError: string;
   emailError: string;
   avatarList: Array<string> = [];

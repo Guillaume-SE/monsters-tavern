@@ -1,15 +1,15 @@
-<div *ngIf="onHisProfil()">
-    <div>
-        <p>
+<section>
+    <div *ngIf="onHisProfil()">
+        <p class="form_message">
             Voulez-vous supprimez définitivement votre compte ?
         </p>
+        <div class="form-delete_choices">
+            <button class="btn btn-green" (click)="goToMonsterProfil()">
+                Retour
+            </button>
+            <button class="btn btn-orange" (click)="deleteMonster()">
+                Oui
+            </button>
+        </div>
     </div>
-    <div>
-        <button (click)="goToMonsterProfil()">
-            Retour
-        </button>
-        <button (click)="deleteMonster()">
-            Oui
-        </button>
-    </div>
-</div>
+</section>

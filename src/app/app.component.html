@@ -1,26 +1,39 @@
-<nav>
-    <div>
-        <a [routerLink]="['home/monsters']">
-            Accueil
-        </a>
-    </div>
-    <div *ngIf="isLogged()">
-        <a [routerLink]="['monster/myaccount']">
-            Mon compte
-        </a>
-    </div>
-    <div *ngIf="!isLogged()">
-        <div>
-            <a [routerLink]="['/login']">
-                Se connecter
-            </a>
-        </div>
-        <div>
-            <a [routerLink]="['/signup']">
-                S'inscrire
-            </a>
-        </div>
-    </div>
-</nav>
+<header>
+    <nav class="header_nav">
+        <ul class="header_logo">
+            <li>
+                <img class="header_logo-img" src="./assets/logo.svg" alt="logo monsters tavern">
+            </li>
+            <li>
+                <h1 class="header_title">Monsters tavern</h1>
+            </li>
+        </ul>
 
-<router-outlet></router-outlet>
+        <ul class="header_nav-list">
+            <li>
+                <a class="header_nav-link" [routerLink]="['home/monsters']" title="Accueil du site">
+                    Accueil
+                </a>
+            </li>
+            <li *ngIf="isLogged()">
+                <a class="header_nav-link" [routerLink]="['monster/myaccount']" title="Espace personnel">
+                    Mon compte
+                </a>
+            </li>
+            <li *ngIf="!isLogged()">
+                <a class="header_nav-link" [routerLink]="['/login']" title="Connexion à son espace">
+                    Se connecter
+                </a>
+            </li>
+            <li *ngIf="!isLogged()">
+                <a class="header_nav-link" [routerLink]="['/signup']" title="Création d'un compte">
+                    S'inscrire
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <router-outlet></router-outlet>
+</main>

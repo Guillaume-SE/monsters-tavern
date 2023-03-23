@@ -1,49 +1,59 @@
-<div>
-    <p>
+<section class="form">
+    <p class="form_message">
         {{ message }}
+    </p>
+    <p class="error-message">
+        {{ errorMessage }}
     </p>
     <form name="form"
         #loginForm="ngForm"
         (ngSubmit)="onSubmit()"
     >
         <div>
-            <label for="email">Adresse email</label>
-            <input type="text" id="email" [(ngModel)]="form.email" name="email" #email="ngModel" required autocomplete="off">
-            <span *ngIf="email.errors && loginForm.submitted">
+            <label for="email" class="form_input-descr">Adresse email</label>
+            <input type="text"
+                    id="email"
+                    class="form_input"
+                    [(ngModel)]="form.email"
+                    name="email"
+                    #email="ngModel"
+                    autocomplete="off"
+                    required
+                >
+            <span class="error-message" *ngIf="email.errors && loginForm.submitted">
                 Adresse email requise
             </span>
         </div>
-        <div>
-            <label for="password">Password</label>
+        <div class="form_password">
+            <label for="password" class="form_input-descr">Mot de passe</label>
             <input [type]="changetype? 'password' : 'text'"
                     id="password"
+                    class="form_input"
                     [(ngModel)]="form.password"
                     #password="ngModel"
                     name="password"
                     required
                 >
             <div (click)="viewPassword()">
-                <img class="visibility-password_icon"
+                <img class="form_password-icon"
                     [src]="passwordVisible ? iconShow : iconHide"
                     [title]="passwordVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe'"
                     [alt]="passwordVisible ? 'afficher' : 'masquer'">
             </div>
-            <span *ngIf="password.errors && loginForm.submitted">
+            <span class="error-message" *ngIf="password.errors && loginForm.submitted">
                 Mot de passe est requis
             </span>
         </div>
         <div>
-            <button type="submit" [disabled]="!loginForm.form.valid">
+            <button class="btn btn-green" type="submit" [disabled]="!loginForm.form.valid">
                 Se connecter
             </button>
         </div>
     </form>
-    <div>
         <p>
             Pas encore membre ?
+            <a class="loginform_link" [routerLink]="['/signup']">
+                Créer un compte
+            </a>
         </p>
-        <a [routerLink]="['/signup']">
-            Créer un compte
-        </a>
-    </div>
-</div>
+</section>

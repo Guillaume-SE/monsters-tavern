@@ -1,164 +1,152 @@
-<div>
-    <p>
+<section class="form">
+    <p class="form_message">
         {{ message }}
     </p>
     <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
         <div>
+            <!-- monster name -->
             <div>
-                <div>
+                <label for="name" class="form_input-descr">
+                    Nom
+                </label>
+                <input class="form_input" type="text" id="name" [(ngModel)]="form.name" name="name"
+                    #name="ngModel" autocomplete="off" required>
+                <span class="error-message" [hidden]="name.valid || name.pristine">
+                    Un nom est requis (1-35)
+                </span>
+                <span class="error-message">
+                    {{ nameError }}
+                </span>
+            </div>
 
-                    <!-- monster name -->
-                    <div>
-                        <label for="name">Nom</label>
-                        <input type="text" id="name" [(ngModel)]="form.name" name="name" #name="ngModel"
-                            autocomplete="off" required>
+            <!-- monster email -->
+            <div>
+                <label for="email" class="form_input-descr">Adresse email</label>
+                <input class="form_input" type="text" id="email" [(ngModel)]="form.email" email="true"
+                    name="email" #email="ngModel" autocomplete="off" required>
+                <span class="error-message" [hidden]="email.valid || email.pristine">
+                    Vous devez indiquer une adresse mail valide
+                </span>
+                <span class="error-message">
+                    {{ emailError }}
+                </span>
+            </div>
 
-                        <div [hidden]="name.valid || name.pristine">
-                            Un nom est requis (1-35)
-                        </div>
-                        <span>
-                            {{ nameError }}
-                        </span>
-                    </div>
-
-                    <!-- monster email -->
-                    <div>
-                        <label for="email">Email</label>
-                        <input type="text" id="email" [(ngModel)]="form.email" email="true" name="email"
-                            #email="ngModel" autocomplete="off" required>
-                        <div [hidden]="email.valid || email.pristine">
-                            Vous devez indiquer une adresse mail valide
-                        </div>
-                        <span>
-                            {{ emailError }}
-                        </span>
-                    </div>
-
-                    <!-- monster password -->
-                    <div>
-                        <label for="password">Mot de passe</label>
-                        <input [type]="changetype? 'password' : 'text'"
-                                id="password"
-                                required
-                                [(ngModel)]="form.password"
-                                name="password"
-                                #password="ngModel"
-                            >
-                        <div (click)="viewPassword()">
-                            <img class="visibility-password_icon"
-                                [src]="passwordVisible ? iconShow : iconHide"
-                                [title]="passwordVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe'"
-                                [alt]="passwordVisible ? 'afficher' : 'masquer'">
-                        </div>
-                        <div [hidden]="password.valid || password.pristine">
-                            Un mot de passe est requis
-                        </div>
-                    </div>
-
-                    <!-- monster race -->
-                    <div>
-                        <label for="race">Indiquez votre race</label>
-                        <select name="race" id="race-select" [(ngModel)]="form.race" required>
-                            <option value="" disabled>
-                                --Choisissez une option--
-                            </option>
-                            <option value="Démon">
-                                Démon
-                            </option>
-                            <option value="Lycanthrope">
-                                Lycanthrope
-                            </option>
-                            <option value="Vampire">
-                                Vampire
-                            </option>
-                            <option value="Orc">
-                                Orc
-                            </option>
-                            <option value="Gobelin">
-                                Gobelin
-                            </option>
-                            <option value="Elfe">
-                                Elfe
-                            </option>
-                            <option value="Dragon">
-                                Dragon
-                            </option>
-                            <option value="Harpie">
-                                Harpie
-                            </option>
-                            <option value="Goule">
-                                Goule
-                            </option>
-                        </select>
-                    </div>
-
-                    <!-- monster role -->
-                    <div>
-                        <label for="role">Indiquez votre role</label>
-                        <select name="role" id="role-select" [(ngModel)]="form.role" required>
-                            <option value="" disabled>
-                                --Choisissez une option--
-                            </option>
-                            <option value="Alchimiste">
-                                Alchimiste
-                            </option>
-                            <option value="Archer">
-                                Archer
-                            </option>
-                            <option value="Assassin">
-                                Assassin
-                            </option>
-                            <option value="Espion">
-                                Espion
-                            </option>
-                            <option value="Guerrier">
-                                Guerrier
-                            </option>
-                            <option value="Nécromancien">
-                                Nécromancien
-                            </option>
-                            <option value="Soigneur">
-                                Soigneur
-                            </option>
-                            <option value="Sorcier">
-                                Sorcier
-                            </option>
-                        </select>
-                    </div>
-
-                    <!-- monster avatar  -->
-                    <div class="select-avatar">
-                        <p class="select-avatar_text">
-                            Choisissez votre avatar
-                        </p>
-                        <div (click)="selectThisAvatar(avatar)"
-                            class="select-avatar_avatar-box"
-                            name="avatar"
-                            [attr.data-avatar]="avatar"
-                            *ngFor="let avatar of avatarList"
-                            >
-                            <img class="avatar" src="./assets/avatar/{{avatar}}.svg" alt="">
-                        </div>
-                    </div>
-
-                    <!-- Submit button -->
-                    <div>
-                        <button type="submit" [disabled]="!signupForm.form.valid">
-                            S'inscrire
-                        </button>
-                    </div>
-
+            <!-- monster password -->
+            <div class="form_password">
+                <label for="password" class="form_input-descr">Mot de passe</label>
+                <input class="form_input" [type]="changetype? 'password' : 'text'" id="password"
+                    [(ngModel)]="form.password" name="password" #password="ngModel" required>
+                <div (click)="viewPassword()">
+                    <img class="form_password-icon" [src]="passwordVisible ? iconShow : iconHide"
+                        [title]="passwordVisible ? 'Afficher le mot de passe' : 'Masquer le mot de passe'"
+                        [alt]="passwordVisible ? 'afficher' : 'masquer'">
+                </div>
+                <div [hidden]="password.valid || password.pristine">
+                    Un mot de passe est requis
                 </div>
             </div>
+
+            <!-- monster race -->
+            <div>
+                <label for="race" class="form_input-descr">Indiquez votre race</label>
+                <select name="race" class="form_select" id="race-select" [(ngModel)]="form.race" required>
+                    <option value="" disabled>
+                        --Choisissez une option--
+                    </option>
+                    <option value="Démon">
+                        Démon
+                    </option>
+                    <option value="Lycanthrope">
+                        Lycanthrope
+                    </option>
+                    <option value="Vampire">
+                        Vampire
+                    </option>
+                    <option value="Orc">
+                        Orc
+                    </option>
+                    <option value="Gobelin">
+                        Gobelin
+                    </option>
+                    <option value="Elfe">
+                        Elfe
+                    </option>
+                    <option value="Dragon">
+                        Dragon
+                    </option>
+                    <option value="Harpie">
+                        Harpie
+                    </option>
+                    <option value="Goule">
+                        Goule
+                    </option>
+                </select>
+            </div>
+
+            <!-- monster role -->
+            <div>
+                <label for="role" class="form_input-descr">Indiquez votre role</label>
+                <select name="role" class="form_select" id="role-select" [(ngModel)]="form.role" required>
+                    <option value="" disabled>
+                        --Choisissez une option--
+                    </option>
+                    <option value="Alchimiste">
+                        Alchimiste
+                    </option>
+                    <option value="Archer">
+                        Archer
+                    </option>
+                    <option value="Assassin">
+                        Assassin
+                    </option>
+                    <option value="Espion">
+                        Espion
+                    </option>
+                    <option value="Guerrier">
+                        Guerrier
+                    </option>
+                    <option value="Nécromancien">
+                        Nécromancien
+                    </option>
+                    <option value="Soigneur">
+                        Soigneur
+                    </option>
+                    <option value="Sorcier">
+                        Sorcier
+                    </option>
+                </select>
+            </div>
+
+            <!-- monster avatar  -->
+            <div class="select-avatar">
+                <p class="select-avatar_text">
+                    Choisissez votre avatar
+                </p>
+                <div (click)="selectThisAvatar(avatar)"
+                    class="select-avatar_box"
+                    name="avatar"
+                    [attr.data-avatar]="avatar"
+                    *ngFor="let avatar of avatarList"
+                >
+                    <img class="avatar" src="./assets/avatar/{{avatar}}.svg" alt="">
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div>
+                <button class="btn btn-orange" type="submit" [disabled]="!signupForm.form.valid">
+                    S'inscrire
+                </button>
+            </div>
+
         </div>
     </form>
-</div>
 
-<div>
     <p>
         Déjà membre ?
+        <a class="signupform_link" [routerLink]="['/login']">
+            Connectez-vous
+        </a>
     </p>
-    <a [routerLink]="['/login']">
-        Connectez-vous
-    </a>
-</div>
+</section>

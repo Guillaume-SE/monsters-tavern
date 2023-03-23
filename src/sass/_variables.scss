@@ -1,0 +1,29 @@
+// Font
+
+$main-font-family: "Poppins", sans-serif;
+$title-font-family: "Montserrat", sans-serif;
+$base-font-size: 16px;
+$h1-font-size: 1em;
+$h2-font-size: 1.2em;
+
+//Colors
+
+$dark: #000000;
+$light: #FFFFFF;
+$primary: #4CBA9D;
+$secondary: #F07E61;
+$primary-to-filter: invert(56%) sepia(58%) saturate(373%) hue-rotate(114deg) brightness(103%) contrast(86%);
+$secondary-to-filter: invert(73%) sepia(22%) saturate(6070%) hue-rotate(319deg) brightness(98%) contrast(91%);
+
+// Box shadow
+
+$primary-shadow-static: 0 1px 3px rgba(76,186,157,0.5), 0 1px 2px rgba(76,186,157,0.5);
+$primary-shadow-hover: 0 14px 28px rgba(76,186,157,0.25), 0 10px 10px rgba(76,186,157,0.25);
+$secondary-shadow-static: 0 1px 3px rgba(240,126,97,0.5), 0 1px 2px rgba(240,126,97,0.5);
+$secondary-shadow-hover: 0 14px 28px rgba(240,126,97,0.25), 0 10px 10px rgba(240,126,97,0.25);
+
+// Borders
+
+$default-radius: 3px;
+$border-green: solid 2px $primary;
+$border-orange: solid 2px $secondary;

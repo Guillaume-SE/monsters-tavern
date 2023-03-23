@@ -1,15 +1,15 @@
-<h1>Liste des monstres</h1>
-
-<div>
-    <div *ngFor="let monster of monsterList" (click)="goToMonsterProfil(monster)" class="monster-card">
-        <div>
+<section class="homepage">
+    <article *ngFor="let monster of monsterList"
+            (click)="goToMonsterProfil(monster)"
+            class="homepage_card">
+        <div class="homepage_card_identity">
             <img class="avatar" [src]="monster.avatar" alt="" />
-        </div>
-        <div>
             <p>
                 {{ monster.name }}
             </p>
-            <ul>
+        </div>
+        <div>
+            <ul class="homepage_card_infos">
                 <li>
                     {{ monster.role }}
                 </li>
@@ -18,9 +18,9 @@
                 </li>
             </ul>
         </div>
-    </div>
-</div>
+    </article>
+</section>
 
 <div *ngIf="monsterList.length == 0">
-        <app-loader></app-loader>
+    <app-loader></app-loader>
 </div>

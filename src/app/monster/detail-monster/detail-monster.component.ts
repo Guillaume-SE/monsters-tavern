@@ -81,6 +81,7 @@ export class DetailMonsterComponent implements OnInit {
           this.followingList = followingList,
             this.followingCount = followingList.length;
             this.isFollowing = followingList.some(monster => monster._id === this.loggedMonsterId);
+            this.showFollowing = false;
         });
 
       this.followService.getMonsterFollowerList(monsterId)
@@ -88,6 +89,7 @@ export class DetailMonsterComponent implements OnInit {
           this.followerList = followerList,
             this.followerCount = followerList.length;
             this.isFollower = followerList.some(monster => monster._id === this.loggedMonsterId);
+            this.showFollower = false;
         });
     }
   }
