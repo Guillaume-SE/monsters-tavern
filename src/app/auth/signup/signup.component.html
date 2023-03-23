@@ -119,10 +119,11 @@
             </div>
 
             <!-- monster avatar  -->
+            <p class="select-avatar_text">
+                Choisissez votre avatar ou laissez place à un monstrueux hasard
+            </p>
+            <img class="avatar" [src]="form.avatar" alt="">
             <div class="select-avatar">
-                <p class="select-avatar_text">
-                    Choisissez votre avatar
-                </p>
                 <div (click)="selectThisAvatar(avatar)"
                     class="select-avatar_box"
                     name="avatar"

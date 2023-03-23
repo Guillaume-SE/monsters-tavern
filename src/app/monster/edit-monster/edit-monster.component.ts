@@ -10,8 +10,7 @@ import { ApiErrorService } from 'src/app/_subjects/api-error.service';
 
 @Component({
   selector: 'app-edit-monster',
-  templateUrl: './edit-monster.component.html',
-  styleUrls: ['./edit-monster.component.scss']
+  templateUrl: './edit-monster.component.html'
 })
 export class EditMonsterComponent implements OnInit {
 
