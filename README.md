@@ -1,3 +1,26 @@
 # MonstersTavern
 
-## Work in progress
+## A propos 
+
+Projet exercice servant de front à l'API Monsters Tavern sur le thème des monstres.  
+- Création d'un profil 
+- Consultation des profils des autres monstres 
+- Suivi de profils
+
+## Pré-requis 
+
+Pour fonctionner, le projet requiert l'API Monsters Tavern:
+[Monsters Tavern API](https://github.com/Guillaume-SE/monsters-tavern-api)
+
+## Installation 
+
+```
+git clone
+npm install
+```
+
+## Lancement 
+
+```
+ng serve
+```
