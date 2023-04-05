@@ -2,7 +2,7 @@
 
 ## A propos 
 
-Projet exercice servant de front à l'API Monsters Tavern sur le thème des monstres.  
+Projet exercice servant de front à l'API Monsters Tavern sur le thème des monstres sous la forme d'un réseau social.  
 - Création d'un profil 
 - Consultation des profils des autres monstres 
 - Suivi de profils
