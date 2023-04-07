@@ -159,6 +159,16 @@ body {
     margin: auto;
 }
 
+.homepage_title {
+    width: 100%;
+    margin: 26px auto;
+    text-align: center;
+    font-weight: bold;
+    background-color: $primary;
+    padding: 16px;
+    border-radius: $default-radius;
+}
+
 .homepage_card {
     width: 250px;
     margin: 8px;
@@ -309,4 +319,13 @@ body {
 .pagenotfound_link {
     font-weight: bold;
     color: $secondary;
+}
+
+.loader-box {
+    text-align: center;
+}
+
+.loader-text {
+    margin: 26px auto;
+    font-weight: bold;
 }

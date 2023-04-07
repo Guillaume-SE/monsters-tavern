@@ -10,7 +10,9 @@ import { IMonster } from 'src/app/_interfaces/monster';
   templateUrl: './list-monsters.component.html'
 })
 export class ListMonstersComponent implements OnInit {
+
   monsterList: IMonster[] = [];
+  isLoading: boolean = true;
 
   constructor(
     private router: Router,
@@ -20,7 +22,10 @@ export class ListMonstersComponent implements OnInit {
   ngOnInit() {
 
     this.monsterService.getMonsterList()
-      .subscribe((monsterList) => this.monsterList = monsterList);
+      .subscribe((monsterList) => {
+        this.monsterList = monsterList;
+        this.isLoading = false;
+      });
   }
 
   goToMonsterProfil(monster: IMonster) {
