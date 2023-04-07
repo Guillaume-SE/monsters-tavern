@@ -169,6 +169,26 @@ body {
     border-radius: $default-radius;
 }
 
+.homepage_searchbar {
+    width: 50%;
+    margin: 16px auto 0 auto;
+    text-align: center;
+}
+.homepage_searchbar-descr {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+}
+.homepage_searchbar-input {
+    width: 60%;
+    height: 2.5em;
+    margin: 1em auto;
+    padding: 1em;
+    border: solid 1px $primary;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
 .homepage_card {
     width: 250px;
     margin: 8px;
@@ -177,6 +197,7 @@ body {
     overflow: hidden;
     box-shadow: $primary-shadow-static;
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    cursor: pointer;
 }
 
 .homepage_card:hover {

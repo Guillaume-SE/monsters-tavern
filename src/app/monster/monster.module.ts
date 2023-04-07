@@ -14,6 +14,7 @@ import { DeleteMonsterComponent } from './delete-monster/delete-monster.componen
 import { MonsterService } from '../_services/monster.service';
 import { FollowService } from '../_services/follow.service';
 import { AccountComponent } from './account/account.component';
+import { SearchMonsterComponent } from './search-monster/search-monster.component';
 
 const monsterRoutes: Routes = [
   {
@@ -48,7 +49,8 @@ const monsterRoutes: Routes = [
     EditMonsterComponent,
     DeleteMonsterComponent,
     LoaderComponent,
-    AccountComponent
+    AccountComponent,
+    SearchMonsterComponent
   ],
   imports: [
     CommonModule,

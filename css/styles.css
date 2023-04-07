@@ -53,14 +53,14 @@ td, th {
   cursor: pointer;
 }
 
-.signupform-password_icon, .loginform-password_icon {
+.form_password-icon {
   position: absolute;
   top: 35px;
   right: 5px;
   width: 30px;
 }
 
-.signupform, .loginform {
+.form {
   width: 40%;
   min-height: 300px;
   margin: 5em auto;
@@ -68,7 +68,7 @@ td, th {
   text-align: center;
 }
 
-.signupform_input, .loginform_input {
+.form_input {
   width: 100%;
   height: 2.5em;
   margin: 1em auto;
@@ -90,6 +90,36 @@ body {
 
 .btn:active {
   transform: translateY(1px);
+}
+
+.btn-green {
+  background-color: #4CBA9D;
+}
+
+.btn-green:hover {
+  box-shadow: 0 14px 28px rgba(76, 186, 157, 0.25), 0 10px 10px rgba(76, 186, 157, 0.25);
+}
+
+.btn-orange {
+  background-color: #F07E61;
+  border: solid 2px #F07E61;
+  border-radius: 3px;
+}
+
+.btn-orange:hover {
+  box-shadow: 0 14px 28px rgba(240, 126, 97, 0.25), 0 10px 10px rgba(240, 126, 97, 0.25);
+}
+
+.avatar-big {
+  width: 110px;
+}
+
+.avatar {
+  width: 60px;
+}
+
+.avatar-small {
+  width: 30px;
 }
 
 .header_nav {
@@ -128,42 +158,23 @@ body {
   color: #F07E61;
 }
 
-.loginform_message {
+.form_message {
   margin-bottom: 1em;
   font-size: 1.5em;
   font-weight: bold;
+  text-align: center;
 }
 
-.loginform_input-descr {
+.form_input-descr {
   display: block;
   text-align: start;
 }
 
-.loginform_password {
+.form_password {
   position: relative;
 }
 
-.loginform_btn {
-  background-color: #4CBA9D;
-}
-
-.loginform_link {
-  color: #4CBA9D;
-  font-weight: bold;
-}
-
-.signup_message {
-  margin-bottom: 1em;
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.signupform_input-descr {
-  display: block;
-  text-align: start;
-}
-
-.signupform_select {
+.form_select {
   width: 100%;
   height: 3.5em;
   margin: 1em auto;
@@ -173,8 +184,9 @@ body {
   font-weight: bold;
 }
 
-.signupform-password {
-  position: relative;
+.loginform_link {
+  color: #4CBA9D;
+  font-weight: bold;
 }
 
 .signupform_link {
@@ -182,8 +194,10 @@ body {
   font-weight: bold;
 }
 
-.signupform_btn {
-  background-color: #F07E61;
+.form-delete_choices {
+  display: flex;
+  width: 50%;
+  margin: auto;
 }
 
 .homepage {
@@ -191,6 +205,38 @@ body {
   flex-wrap: wrap;
   width: 95%;
   margin: auto;
+}
+
+.homepage_title {
+  width: 100%;
+  margin: 26px auto;
+  text-align: center;
+  font-weight: bold;
+  background-color: #4CBA9D;
+  padding: 16px;
+  border-radius: 3px;
+}
+
+.homepage_searchbar {
+  width: 50%;
+  margin: 16px auto 0 auto;
+  text-align: center;
+}
+
+.homepage_searchbar-descr {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+}
+
+.homepage_searchbar-input {
+  width: 60%;
+  height: 2.5em;
+  margin: 1em auto;
+  padding: 1em;
+  border: solid 1px #4CBA9D;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
 .homepage_card {
@@ -201,6 +247,7 @@ body {
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(76, 186, 157, 0.5), 0 1px 2px rgba(76, 186, 157, 0.5);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
 }
 
 .homepage_card:hover {
@@ -229,6 +276,9 @@ body {
 }
 
 .monster-profil_name {
+  width: 50%;
+  text-align: center;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -236,41 +286,64 @@ body {
   text-align: center;
 }
 
-.monster-profil_avatar {
-  width: 100px;
-}
-
 .monster-profil_follow {
   display: flex;
   justify-content: space-around;
+  text-align: center;
 }
 
-.monster-profil_following {
-  width: 40%;
-}
-
+.monster-profil_following,
 .monster-profil_follower {
-  width: 40%;
-  text-align: end;
+  width: 30%;
 }
 
-.monster-profil_following-btn,
-.monster-profil_follower-btn {
-  margin: 1em auto;
-  padding: 1em;
-  font-weight: bold;
-  color: black;
-  border-radius: 4px;
-  border: none;
+.monster-profil_follow-list {
+  display: flex;
+  margin: 8px auto;
+  font-size: 14px;
+  border-radius: 3px;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(76, 186, 157, 0.5), 0 1px 2px rgba(76, 186, 157, 0.5);
   cursor: pointer;
 }
 
-.monster-profil_follow-btn {
-  background-color: #4CBA9D;
+.monster-profil_follow-list:hover {
+  box-shadow: 0 14px 28px rgba(76, 186, 157, 0.25), 0 10px 10px rgba(76, 186, 157, 0.25);
 }
 
-.monster-profil_unfollow-btn {
-  background-color: #F07E61;
+.monster-profil_text {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.monster-profil_link-login {
+  color: #4CBA9D;
+}
+
+.monster-profil_link-signup {
+  color: #F07E61;
+}
+
+.monster-profil_options {
+  width: 40%;
+  margin: auto;
+}
+
+.monster-profil_options-list {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+}
+
+.monster-profil_options-btn {
+  min-width: 90px;
+  width: 155px;
+  margin: 6px auto;
+  padding: 6px 0;
+  font-weight: bold;
+  cursor: pointer;
+  border: solid 1px black;
 }
 
 .select-avatar {
@@ -285,18 +358,43 @@ body {
   text-align: center;
 }
 
-.avatar {
-  width: 60px;
-  height: 60px;
-}
-
-.select-avatar_avatar-box {
+.select-avatar_box {
   width: 24%;
   text-align: center;
   border: 2px solid transparent;
 }
 
-.select-avatar_avatar-box:hover {
+.select-avatar_box:hover {
   box-shadow: 0 14px 28px rgba(76, 186, 157, 0.25), 0 10px 10px rgba(76, 186, 157, 0.25);
   border-radius: 5px;
+}
+
+.pagenotfound {
+  text-align: center;
+}
+
+.pagenotfound_title {
+  margin: 24px auto;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #F07E61;
+}
+
+.pagenotfound_img {
+  margin: 26px auto;
+  width: 300px;
+}
+
+.pagenotfound_link {
+  font-weight: bold;
+  color: #F07E61;
+}
+
+.loader-box {
+  text-align: center;
+}
+
+.loader-text {
+  margin: 26px auto;
+  font-weight: bold;
 }/*# sourceMappingURL=styles.css.map */

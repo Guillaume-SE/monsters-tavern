@@ -3,15 +3,13 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 
 import { IMonster, IMonsterProfil } from 'src/app/_interfaces/monster';
-import { TokenService } from './token.service';
 
 @Injectable()
 export class MonsterService {
   BASE_URL: string = 'http://localhost:3000/monsters';
 
   constructor(
-    private http: HttpClient,
-    private tokenService: TokenService
+    private http: HttpClient
   ) { }
 
   private log(response: IMonster[] | IMonster | undefined) {
@@ -31,6 +29,15 @@ export class MonsterService {
 
   getMonsterById(monsterId: string | null): Observable<IMonster> {
     return this.http.get<IMonster>(`${this.BASE_URL}/${monsterId}`).pipe(
+      catchError((error) => this.handleError(error, undefined))
+    );
+  }
+
+  searchMonsterList(term: string): Observable<IMonsterProfil[]> {
+    if (term.length <= 1) {
+      return of([]);
+    }
+    return this.http.get<IMonsterProfil[]>(`http://localhost:3000/search/${term}`).pipe(
       catchError((error) => this.handleError(error, undefined))
     );
   }

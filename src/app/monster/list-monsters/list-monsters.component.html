@@ -1,10 +1,11 @@
 <section class="homepage">
-    <p class="homepage_title" *ngIf="!isLoading && monsterList.length > 0">
-        Consultez les fiches de nos monstrueux membres
-    </p>
+    <div class="homepage_title" *ngIf="!isLoading && monsterList.length > 0">
+        <app-search-monster></app-search-monster>
+    </div>
     <p class="homepage_title" *ngIf="!isLoading && monsterList.length === 0">
         C'est bien silencieux par ici, rejoignez-nous !
     </p>
+
     <article *ngFor="let monster of monsterList"
             (click)="goToMonsterProfil(monster)"
             class="homepage_card">

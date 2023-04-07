@@ -27,6 +27,7 @@ export class DetailMonsterComponent implements OnInit {
   loggedMonsterId: IDecodedToken['id'];
   showFollowing: boolean = false;
   showFollower: boolean = false;
+  isLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -70,6 +71,7 @@ export class DetailMonsterComponent implements OnInit {
       .subscribe((monster) => {
         this.monster = monster,
           this.monsterProfilId = monster._id;
+          this.isLoading = false;
           if( this.onHisProfil()) {
             this.router.navigate(['monster/myaccount']);
           }

@@ -1,0 +1,17 @@
+<div class="homepage_searchbar">
+    <label class="homepage_searchbar-descr" for="">Rechercher un monstre par son nom</label>
+    <input class="homepage_searchbar-input"
+            type="text"
+            #searchBox
+            (keyup)="search(searchBox.value)"
+            placeholder="Recherche">
+
+    <div class="homepage_searchbar-result">
+        <a *ngFor="let monster of monsters$ | async "
+            [routerLink]="['/monster/profil', monster._id]"
+            class="homepage_searchbar-result-link"
+        >
+            {{ monster.name}}
+        </a>
+    </div>
+</div>

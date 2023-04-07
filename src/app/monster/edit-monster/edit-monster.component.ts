@@ -31,6 +31,7 @@ export class EditMonsterComponent implements OnInit {
   PATH_EXT: string = ".svg";
   nameError: string;
   emailError: string;
+  isLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,10 @@ export class EditMonsterComponent implements OnInit {
 
     if (this.monsterProfilId) {
       this.monsterService.getMonsterById(this.monsterProfilId)
-        .subscribe(monster => this.form = monster);
+        .subscribe(monster => {
+          this.form = monster;
+          this.isLoading = false;
+      });
     }
 
     if (this.isLogged()) {

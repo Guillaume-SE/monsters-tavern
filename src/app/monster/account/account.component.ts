@@ -27,6 +27,7 @@ export class AccountComponent implements OnInit {
   showFollowing: boolean = false;
   showFollower: boolean = false;
   showOptions: boolean = false;
+  isLoading: boolean = true;
 
   constructor(
     private router: Router,
@@ -69,6 +70,7 @@ export class AccountComponent implements OnInit {
       .subscribe((monster) => {
         this.monster = monster,
           this.monsterProfilId = monster._id
+          this.isLoading = false;
       })
 
       this.followService.getMonsterFollowingList(monsterId)
