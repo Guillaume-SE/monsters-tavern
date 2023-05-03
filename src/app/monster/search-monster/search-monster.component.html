@@ -9,7 +9,7 @@
     <div class="homepage_searchbar-result">
         <a *ngFor="let monster of monsters$ | async "
             [routerLink]="['/monster/profil', monster._id]"
-            class="homepage_searchbar-result-link"
+            class="homepage_searchbar-link"
         >
             {{ monster.name}}
         </a>
